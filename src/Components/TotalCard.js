@@ -8,7 +8,7 @@ class TotalCard extends React.Component{
         console.log("TotalCard",this.props.props);
         
         return(
-                    <div className="card">
+                    <div className="card ">
                     <div className="card-body ">
                     <h5 className="card-title">Total Stocks In Inventory = {this.props.length}</h5>
                         <p className="card-text"></p>

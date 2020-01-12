@@ -1,253 +1,209 @@
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="staticstyles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="staticstyles.css">
 </head>
+
 <body>
-<!-- TOPBAR -->
 
-<nav class="navbar topnav navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="#">Inventory Web App</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topbarnav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="topbarnav">
-      <ul class="navbar-nav mr-auto">
+  <div class="d-flex flex-column">
+    <!-- TOPBAR -->
+    <nav class="navbar  topnav navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="#">Inventory Web App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topbarnav"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="topbarnav">
+        <ul class="navbar-nav mr-auto">
 
 
-<!-- plusimg -->
+          <!-- plusimg -->
           <li class="itemtop nav-item dropdown">
-              <a class="plusontop nav-link" id="adddropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="plus.png" class="my-auto plusimg" alt="Responsive image">
-              </a>
-              <div class="dropdown-menu" aria-labelledby="adddropdown">
-                  <a class="dropdown-item" href="#" data-toggle="modal" data-target=".newcustomer-modal-lg">Add New Customer</a>
-                  <a class="dropdown-item" href="#" data-toggle="modal" data-target=".newinvoice-modal-lg">Add New Invoice</a>
-                  <a class="dropdown-item" href="#" data-toggle="modal" data-target=".newitem-modal-lg">Add New Item</a>
-                </div>
-              </li>
-        
-        
-        
-              <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-</nav>
-
-<!-- SIDEBAR -->
-
-<nav class="sidebar p-0 h-100 flex-column navbar navbar-expand-lg navbar-light"
-style="background-color: rgb(255, 255, 128);">
-<div class = "container-fluid justify-content-center">
-<button class="navbar-toggler "id = "sidebarbutton" type="button" data-toggle="" data-target="#sidebarnav"
-    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-</div>
-<div class="navitems  navbar-" id="sidebarnav">
-    
-  <ul class=" navitems-ul flex-column align-items-start navbar-nav">
-    <li class=" flex-row w-100 nav-item">
-      <a class="d-flex justify-content-center nav-link pr-0 pl-0" href="#">Home <span
-          class="sr-only">(current)</span></a>
-    </li>
-
-    <!-- Code Done HERE -->
-    <li class="d-flex justify-content-center flex-row w-100 navitemicon itemside nav-item">
-      <a class="py-auto nav-link txt-center flex-grow-1 " href="#">Features </a>
-      <button class="itemside btn boton" data-toggle="tooltip" data-placement="right" title="Tooltip on top"><img
-          src="plus.png" class="my-auto plusimg" alt="Responsive image"></button>
-    </li>
-
-    <li class="flex-row w-100 itemside itemside nav-item">
-      <a class="d-flex justify-content-center nav-link pr-0 pl-0" href="#">Pricing</a>
-    </li>
-    <!-- to here -->
-
-    <!-- THE WORKING PART -->
-    <li class="flex-row w-100 itemside nav-item accordion" id="accordionExample">
+            <a class="plusontop nav-link" id="adddropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <img src="plus.png" class="my-auto plusimg" alt="Responsive image">
+            </a>
+            <div class="dropdown-menu" aria-labelledby="adddropdown">
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target=".newcustomer-modal-xl">Add New
+                Customer</a>
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target=".newinvoice-modal-xl">Add New
+                Invoice</a>
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target=".newitem-modal-xl">Add New Item</a>
+            </div>
+          </li>
 
 
-      <a class="d-flex justify-content-center nav-link pr-0 pl-0 accordion" href="#" role="button"
-        data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-        Dropdown link
-      </a>
 
-      <div class="  w-100 collapse show" id="collapse1" data-parent="#accordionExample"
-        aria-labelledby="#accordionExample" aria-controls="collapse1">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
       </div>
+    </nav>
 
-    </li>
-
-    <li class="flex-row w-100 itemside nav-item accordion">
-
-      <a class="d-flex justify-content-center nav-link pr-0 pl-0" href="#" id="#collapseid" role="button"
-        data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
-        Dropdown link
-      </a>
-
-      <div class="  w-100 collapse" id="collapse2" data-parent="#accordionExample"
-        aria-labelledby="#accordionExample" aria-controls="collapse1">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </div>
-    </li>
-  </ul>
-</div>
-</nav>
-
-<div id ="content"></div>
-
-<!-- Bootstrap Models -->
-<div class="modal fade newcustomer-modal-lg" id="newcustomer" tabindex="-1" role="dialog" aria-labelledby="newcustomerLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="newcustomerLabel">Add New Customer</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade newinvoice-modal-lg" id="newcustomer" tabindex="-1" role="dialog" aria-labelledby="newinvoiceLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="newinvoiceLabel">Add New Invoice</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+    <!-- SIDEBAR -->
+    <div class="d-flex flex-row">  
+      <aside>
+        <nav class="sidebar d-flex flex-column navbar navbar-expand-lg navbar-light" style="">
+          <!-- tollger icon -->
+          <div class="container-fluid justify-content-center">
+            <button class="navbar-toggler " id="sidebarbutton" type="button" data-toggle="" data-target="#sidebarnav"
+              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
             </button>
           </div>
-          <div class="modal-body">
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="modal fade newitem-modal-lg" id="newitem" tabindex="-1" role="dialog" aria-labelledby="newitemLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="newitemLabel">Add New Item</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form class = "container">
-                <div class=" form-row">
-                  <div class="col form-group">
-                      <label for="name">Item Name</label>
-                    <input type="text" id = "name" class="form-control shadow rounded" placeholder="item name">
-                  </div>
-                  <div class="col  form-group">
-                      <label for="quantity">Item quantity</label>
-                    <input type="text" class="form-control shadow rounded" id = "quantity" placeholder="item quantity">
-                  </div>
+          <div class="navitems collapse navbar-collapse " id="sidebarnav">
+            <ul class=" navitems-ul flex-column align-items-start navbar-nav">
+              <li class=" flex-row w-100  nav-item">
+                <a class="d-flex justify-content-center nav-link " href="#">Home <span
+                    class="sr-only">(current)</span></a>
+              </li>
+
+              <li class="flex-row w-100  itemside nav-item accordion" id="accordionExample">
+                <a class="d-flex justify-content-center nav-link pr-0 pl-0 accordion" href="#" role="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                  Items DROPDOWn
+                </a>
+
+                <div class="  w-100 collapse show" id="collapse1" data-parent="#accordionExample" aria-labelledby="#accordionExample" aria-controls="collapse1">
+                  <a class="dropdown-item py-auto nav-link txt-center  " href="#">
+                    Items
+                    <button class="itemside btn boton" data-toggle="tooltip" data-placement="right"
+                      title="Tooltip on top">
+                      <img src="plus.png" class="my-auto plusimg" alt="Responsive image">
+                    </button>
+                  </a>
+                  <a class="dropdown-item py-auto nav-link txt-center flex-grow-1 " href="#">
+                    Item Groups
+                    <button class="itemside btn boton" data-toggle="tooltip" data-placement="right"
+                      title="Tooltip on top">
+                      <img src="plus.png" class="my-auto plusimg" alt="Responsive image">
+                    </button>
+                  </a>
                 </div>
-                <div class=" form-row">
-                    <div class="col form-group">
-                        <label for="name">Item Name</label>
-                      <input type="text" id = "name" class="form-control shadow rounded" placeholder="item name">
-                    </div>
-                    <div class="col  form-group">
-                        <label for="quantity">Item quantity</label>
-                      <input type="text" class="form-control shadow rounded" id = "quantity" placeholder="item quantity">
-                    </div>
-                  </div>
-                
+              </li>
+
+              <!-- Code Done HERE -->
               
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </form>
+              <!-- to here -->
+
+              <!-- THE WORKING PART -->
+              <li class="flex-row w-100 itemside nav-item accordion">
+                <a class="d-flex justify-content-center nav-link pr-0 pl-0 accordion" href="#" id="#collapseid" role="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
+                  Dropdown link
+                </a>
+
+                <div class="  w-100 collapse" id="collapse2" data-parent="#accordionExample"
+                  aria-labelledby="#accordionExample" aria-controls="collapse1">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+
+              <li class="flex-row w-100 itemside nav-item">
+                <a class="d-flex justify-content-center nav-link pr-0 pl-0" href="#">Pricing</a>
+              </li>
+
+
+            </ul>
           </div>
-        </div>
-      </div>
+
+        </nav>
+      </aside>
+
+      <!-- ReacT App.js -->
+      <section class="d-flex  w-100" id="content"></section>
+    </div>
+    <!-- Bootstrap Models -->
+    <div id="CustomerModel"></div>
+    <div id="ItemModel"></div>
+    <div class="" id="InvoiceModel"></div>
+    
+
+  </div>
 
 </body>
 <script>
-    var checkScrollBars = function () {
-      var b = $('div');
-      var normalw = 0;
-      var scrollw = 0;
-      if (b.prop('scrollHeight') > b.height()) {
-        normalw = window.innerWidth;
-        scrollw = normalw - b.width();
-        $('#container').css({
-          marginRight: '-' + scrollw + 'px'
-        });
-      }
+  var checkScrollBars = function () {
+    var b = $('div');
+    var normalw = 0;
+    var scrollw = 0;
+    if (b.prop('scrollHeight') > b.height()) {
+      normalw = window.innerWidth;
+      scrollw = normalw - b.width();
+      $('#container').css({
+        marginRight: '-' + scrollw + 'px'
+      });
     }
-  </script>
-  
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>
-    $('#sidebarbutton').click(function() {
-   
-   if ($('.navitems').css("display")=="none"){
-     console.log('display == none');
-     
-    $('.navitems').css({'display':"block"});
-    console.log($('.navitems').css('display'));
-    
-   }else{
-     console.log("'display == block'");
-     
-    $('.navitems').css({'float': 'left',
+  $('#sidebarbutton').click(function () {
+    // $('.sidebar').css("min-width","200px");
+    // if($('.sidebar').css("min-width") == "0px"){
+    //   console.log("sidebar property before : ",$('.sidebar').css("min-width"));
+    //   $('.sidebar').css("min-width","200px");
+    //   console.log("sidebar property after : ",$('.sidebar').css("min-width"));
+    // }
+    if ($('.navitems').css("display") == "none") {
+      console.log('display == none');
+
+      $('.navitems').css({
+        'display': "block",
+        'width' : '200px',
+      });
+      console.log($('.navitems').css('display'));
+
+    } else {
+      console.log("'display == block'");
+
+      $('.navitems').css({
+        'width' : '200px',
+        'float': 'left',
         'height': '100%',
-        'display':'none',});
-   }
-   });
-   </script>
+        'display': 'none',
+      });
+    }
+  });
+</script>
+
 </html>

@@ -1,110 +1,162 @@
     /* width */
     ::-webkit-scrollbar {
-        width: 5px;
-      }
-      
-      /* Track */
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1; 
-      }
-       
-      /* Handle */
-      ::-webkit-scrollbar-thumb {
-        background: #888; 
-      }
-      
-      /* Handle on hover */
-      ::-webkit-scrollbar-thumb:hover {
-        background: #555; 
-      }
+      width: 5px;
+    }
 
-      .topnav {
-        background-color: gray;
-      }
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
 
-      #topbarelements{
-        z-index: 1000;
-        background-color: grey;
-        width:100%;
-        text-align: center;
-      }
-      .outline {
-        border: solid black 2px;
-      }
-    
-    
-      @media only screen and (max-width: 989px) {
-        .navitems{
-          display:none;
-        }
-      }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
 
 
-      @media only screen and (width: 990px) {
-        .navitems{
-         display:block !important;
-        }
-      }
-      @media only screen and (min-width: 989px) {
-        .navitems{
-         display:block !important;
-        }
-      }
-    
-      /* The sidebar */
-      .sidebar {
+    .topnav {
+      background-color: gray;
+    }
 
-        float: left;
-        height: 100%;
-        display:block !important;
-      }
-    
-      
+    #topbarelements {
+      z-index: 1000;
+      background-color: grey;
+      width: 100%;
+      text-align: center;
+    }
 
-      .navbar-brand {
-        text-align: center;
-      }
-    
+    .outline {
+      border: solid black 2px;
+    }
+
+
+    @media only screen and (max-width: 989px) {
       .navitems {
-        height: 100%;
-        width: 100%;
+        display: none;
       }
-    
-      .navitems-ul {
-        height: 100%;
-        width: 100%;
-    
+    }
+
+
+    @media only screen and (width: 990px) {
+      .navitems {
+        display: block !important;
       }
-    
-    
-      .plusimg {
-        height: 15px;
-        width: 15px;
+    }
+
+    @media only screen and (min-width: 989px) {
+      .navitems {
+        display: block !important;
       }
-    
-      .plusontop {
-        /* height: 15px;
+    }
+    @media only screen and (max-width: 989px) {
+      .sidebar {
+        
+        min-width:0px !important;
+       
+      }
+    }
+
+
+
+    /* The sidebar */
+    .sidebar {
+      min-width:200px;
+      padding:0;
+      height: 100%;
+      display: block !important;
+      background-color: rgb(255, 255, 128);
+    }
+
+    .fixed {
+      position: fixed;
+    }
+
+    /* .navbar{
+        position:fixed;
+      } */
+    #content {
+      position: static;
+
+    }
+
+    .navbar-brand {
+      text-align: center;
+    }
+
+    .navitems {
+      height: 100%;
+      width: 100%;
+    }
+
+    .navitems-ul {
+      height: 100%;
+      width: 100%;
+
+    }
+
+
+    .plusimg {
+      height: 15px;
+      width: 15px;
+    }
+
+    .plusontop {
+      /* height: 15px;
         width: 15px;
         padding:0; */
-        padding-top: 13px;
+      padding-top: 13px;
+    }
+
+    .boton {
+      background-color: rgb(255, 255, 128);
+      border: none;
+      float: right;
+    }
+
+    .itemtop:hover {
+      border-radius: 50px;
+      background-color: rgb(184, 184, 184);
+    }
+
+    .itemside:hover {
+      border-radius: 50px;
+      background-color: rgb(202, 202, 102);
+    }
+
+    .txt-center {
+      text-align: center;
+    }
+
+
+
+
+    /* STYLING MODELS */
+
+    @media screen and (min-width: 992px) {
+      .modal-dialog {
+        max-width: 100%;
+        /* New width for large modal */
+        /* margin:auto; */
       }
-    
-      .boton {
-        background-color: rgb(255, 255, 128);
-        border: none;
-        float: right;
+
+    }
+
+    @media only screen and (min-width: 600px) {
+
+      /* For tablets: */
+      .modal-dialog {
+        max-width: 100%;
+        /* New width for large modal */
+        /* margin:auto; */
       }
-    
-      .itemtop:hover {
-        border-radius: 50px;
-        background-color: rgb(184, 184, 184);
-      }
-      
-      .itemside:hover {
-        border-radius: 50px;
-        background-color: rgb(202, 202, 102);
-      }
-    
-      .txt-center {
-        text-align: center;
-      }
+    }
+
+    .itemimg {
+      max-width: 100%;
+      height: auto;
+    }
