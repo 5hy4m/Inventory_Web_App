@@ -35,19 +35,9 @@ class ItemModel extends Component {
                   <img src="item.jpeg" className="shadow rounded rounded mx-auto itemimg" alt="..." />
                 </div>
                 </div>
-              
-              <div className=" form-row">
-                <div className="col form-group">
-                  <label htmlFor="name">Item Name</label>
-                  <input type="text" id="name" className="form-control shadow rounded" placeholder="item name" />
-                </div>
-                <div className="col  form-group">
-                  <label htmlFor="quantity">Item quantity</label>
-                  <input type="text" className="form-control shadow rounded" id="quantity" placeholder="item quantity" />
-                </div>
                 
               
-              </div>
+              
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" className="btn btn-primary">Save changes</button>

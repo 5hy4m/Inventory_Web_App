@@ -4,7 +4,7 @@ import '../css/InventorySummary.css'
 export class InventorySummary extends React.Component {
     render() {
         return (
-            <div  className=" card d-flex m-2" style={{width: '18rem',border: '0px'}}>
+            <div  className=" card col-xl-4 col-md-5 col-sm-12 col-11 p-0 m-2" style={{width: '18rem',border: '0px'}}>
                 <div className="card-body  shadow rounded">
                     <h3 className="card-title ">Inventory Summary</h3>
                     <ul id = "" className=" InventorySummary list-group list-group-flush">

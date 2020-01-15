@@ -9,7 +9,7 @@ class Items extends React.Component {
                     <div className="card-body ">
     <h5 className="card-title">ITEMS= 0</h5>
                         <p className="card-text"></p>
-                        {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
+                        {/* <a href="google.com" class="btn btn-primary">Go somewhere</a> */}
                     </div>
                     </div>
         );

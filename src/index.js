@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import Items from './Components/Items';
-import App from './Components/App';
+import Transforming from './Components/Transforming';
 import * as serviceWorker from './serviceWorker';
-import CustomerModel from './Components/CustomerModel';
-import InvoiceModel from './Components/InvoiceModel';
-import ItemModel from './Components/ItemModel';
 
-ReactDOM.render(<App />, document.getElementById('content'));
-ReactDOM.render(<CustomerModel />, document.getElementById('CustomerModel'));
-ReactDOM.render(<ItemModel />, document.getElementById('ItemModel'));
-ReactDOM.render(<InvoiceModel />, document.getElementById('InvoiceModel'));
+
+
+
+
+// ReactDOM.render(<App />, document.getElementById('dashboard'));
+ReactDOM.render(<Transforming />, document.getElementById('root'));
+
+
+ 
+
 // ReactDOM.render(<Items />, document.getElementById('items'));
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

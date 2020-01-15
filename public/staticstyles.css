@@ -61,6 +61,18 @@
       }
     }
 
+    aside > nav:last-child > #sidebarnav > ul > li > a{
+      font-weight: bold;
+    }
+    aside{
+      background-color: rgb(255, 255, 128);
+      /* min-height:660px ; */
+    }
+
+    .cardvalue{
+      float: right;
+      margin:0 !important;
+    }
 
 
     /* The sidebar */
@@ -79,10 +91,7 @@
     /* .navbar{
         position:fixed;
       } */
-    #content {
-      position: static;
-
-    }
+    
 
     .navbar-brand {
       text-align: center;
@@ -116,6 +125,11 @@
       background-color: rgb(255, 255, 128);
       border: none;
       float: right;
+      display:none;
+    }
+
+    .active{
+      border:solid black 1px;
     }
 
     .itemtop:hover {
