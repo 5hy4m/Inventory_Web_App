@@ -1,0 +1,50 @@
+  
+  .tablecell{
+    /* max-height: 100px; */
+    border:solid  rgb(216, 216, 212) 1px;
+    overflow:auto;
+  }
+
+  .filterbar {
+    max-height: 40px;
+    border-bottom: solid rgb(216, 216, 212) 2px;
+    border-right:solid rgb(216, 216, 212) 2px;
+  }
+
+  .filterbar > .navbar > ul > li{
+    height: 40px;
+  }
+
+  .menuicon{
+    max-height: 40px;
+    max-width:40px;
+    /* float:right; */
+  }
+  .sorticon{
+    height:15px;
+    width:15px;
+  }
+
+  .filterbar > .navbar > ul{
+    min-height:100%;
+  }
+
+  .filterbar > .navbar{
+    height:40px;
+  }
+
+  .filterlist {
+    height: 100%;
+    border-bottom: solid rgb(216, 216, 212) 2px;
+    border-right:solid rgb(216, 216, 212) 2px;
+  }
+  .filterlistbar{
+    height:100%;
+  }
+
+  .filldropdown {
+    float: left;
+    padding-top: 8;
+    border: none;
+    background-color: white;
+  }

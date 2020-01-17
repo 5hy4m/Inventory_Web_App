@@ -18,9 +18,51 @@
       background: #555;
     }
 
+    /* section{
+      background-color: #f4fa9c;
+    } */
+
+    header > nav > a,.itemtop > a,.itemside > a{
+      color:  #f1f1f1 !important;
+    } 
+    .dropdown-menu{
+      background-image: linear-gradient(to right, rgb(236, 0, 140), rgb(252, 103, 103));
+    }
 
     .topnav {
-      background-color: gray;
+           background-image: linear-gradient(to right, rgb(66, 39, 90), rgb(115, 75, 109));  
+    }
+    footer{
+      background-image: linear-gradient(to right, rgb(236, 0, 140), rgb(252, 103, 103));
+    }
+
+    .jumbotron,section{
+      background-color: #f4fa9c;
+      /* background-image: linear-gradient(to right, rgb(202, 197, 49), rgb(243, 249, 167));  */
+    }
+    .boton {
+      background-color: #d81d55 !important;
+      border: none;
+      float: right;
+      display:none;
+    }
+    .itemtop:hover,.itemside:hover {
+      border-radius: 50px;
+      /* background-color: #ff1f62; */
+      background-image: linear-gradient(to right, rgb(236, 0, 140), rgb(252, 103, 103));
+    }
+    aside{
+      background-color: #42275A;
+    }
+
+
+    .navbar-brand {
+      text-align: center;
+      /* background-color: #2d053b !important; */
+    }
+
+    .active{
+      /* border:solid black 1px; */
     }
 
     #topbarelements {
@@ -64,10 +106,7 @@
     aside > nav:last-child > #sidebarnav > ul > li > a{
       font-weight: bold;
     }
-    aside{
-      background-color: rgb(255, 255, 128);
-      /* min-height:660px ; */
-    }
+   
 
     .cardvalue{
       float: right;
@@ -81,7 +120,7 @@
       padding:0;
       height: 100%;
       display: block !important;
-      background-color: rgb(255, 255, 128);
+      /* background-color: rgb(255, 255, 128); */
     }
 
     .fixed {
@@ -93,9 +132,7 @@
       } */
     
 
-    .navbar-brand {
-      text-align: center;
-    }
+
 
     .navitems {
       height: 100%;
@@ -110,38 +147,22 @@
 
 
     .plusimg {
-      height: 15px;
-      width: 15px;
+      height: 32px; 
+      width: 32px;
     }
 
     .plusontop {
       /* height: 15px;
         width: 15px;
         padding:0; */
-      padding-top: 13px;
+      /* padding-top: 13px; */
     }
 
-    .boton {
-      background-color: rgb(255, 255, 128);
-      border: none;
-      float: right;
-      display:none;
-    }
 
-    .active{
-      border:solid black 1px;
-    }
 
-    .itemtop:hover {
-      border-radius: 50px;
-      background-color: rgb(184, 184, 184);
-    }
+  
 
-    .itemside:hover {
-      border-radius: 50px;
-      background-color: rgb(202, 202, 102);
-    }
-
+    
     .txt-center {
       text-align: center;
     }
@@ -173,4 +194,8 @@
     .itemimg {
       max-width: 100%;
       height: auto;
+    }
+
+    footer{
+      max-height:90px;
     }

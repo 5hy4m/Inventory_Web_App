@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import '../css/ProductDetails.css'
+
 import { BoxLoading } from 'react-loadingg';
 
 class ProductDetails extends React.Component {
@@ -34,8 +34,8 @@ class ProductDetails extends React.Component {
     render(){
       // console.log(this.state.products.data);
       if(this.loading){
-        var product = <BoxLoading />
-        var group = <BoxLoading />
+        var product = <BoxLoading color="black" size="default"/>
+        var group = <BoxLoading color="black" />
       }
       else{
         console.log(this.state.products);  
@@ -43,19 +43,20 @@ class ProductDetails extends React.Component {
         group = this.state.groups.length
       }
         return(
-            <div className="card m-2 col-xl-4 col-md-5 col-sm-12 col-11 p-0" style={{width: '18rem'}}>
-              <div className="card-body shadow rounded">
+            <div className="card shadow rounded m-2 col-xl-4 col-md-5 col-sm-12 col-11 p-0" style={{width: '18rem'}}>
+              <div className="card-body ">
                 <h2 className="card-title">Product Details</h2>
                 <ul className="list-group list-group-flush">
               <li className="list-group-item">
                 <h5 className = "font-weight-bolder text-wrap cardkey">All Items</h5>
-                <h2 className = "cardvalue">{product}</h2> 
+                <h2 className = "cardvalue">
+                  {product}
+                </h2> 
               </li>
               <li className="list-group-item">
                 <h5 className = "font-weight-bolder text-wrap cardkey">All Item Groups</h5>
                 <h2 className = "cardvalue">{group}</h2> 
               </li>
-                  <li className="list-group-item">Vestibulum at eros</li>
                 </ul>
                 <p className="card-text"></p>
               </div>

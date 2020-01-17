@@ -12,6 +12,7 @@ th,td,.card-title,.cardkey,.cardvalue{
 
 .cardkey,.cardvalue,.list-group-item,.card{
     background-color: #dce48a !important;
+    /* background-image: linear-gradient(to right, rgb(202, 197, 49), rgb(243, 249, 167)); */
 }
 
 .cardvalue{

@@ -4,6 +4,7 @@ import RecentlySold from './RecentlySold';
 import RecentlyBought from './RecentlyBought';
 import InventorySummary from './InventorySummary';
 import '../css/App.css';
+import '../css/Dashboard.css'
 
 // import TotalCard from './TotalCard';
 // import Items from './Items';
@@ -17,20 +18,6 @@ class DashBoard extends React.Component {
                   groups : [],
     };
   }
-
-// componentDidMount() {
-//     axios.get("http://127.0.0.1:8000/product/").then(function(response){
-//             var data = response.data;
-//             console.log("RESPONSE",data);
-//             this.setState({products:data,loading:false});
-//         }.bind(this));
-       
-//     axios.get("http://127.0.0.1:8000/productgroup/").then(function(response){
-//           var data = response.data;
-//           console.log("RESPONSE",data,);
-//       }.bind(this));
-    
-//   }
   
   render(){
     return (       

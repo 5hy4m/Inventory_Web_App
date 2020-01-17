@@ -6,7 +6,8 @@ import SideBar from './SideBar';
 import Footer from  './Footer';
 import TopNav from './TopNav';
 import DashBoard from './DashBoard';
-import CustomerDetails from './CustomerDetails';
+import Details from './Details';
+import Filter from './Filter';
 
 export class Transforming extends Component {
   constructor(){
@@ -16,21 +17,31 @@ export class Transforming extends Component {
     }
   }
 
-  getContent = (childData) => {
+setSidebarContent = (childData) => {
     this.setState({content: childData})
     console.log(childData);
+}
+
+setSectionContent = (childData) =>{
+this.setState({
+  content:'CustomerDetails',
+})
 }
 
 
     render() {
       switch(this.state.content) {
         case 'Dashboard':
-          console.log('content dec');
+          // console.log('content dec');
           this.display = <section name="content" className="d-flex  w-100"><DashBoard /></section >
+          break;
+        case 'CustomerDetails':
+          // console.log('content dec');
+          this.display = <section name="content" className="d-flex  w-100"><Details detailsType='CustomerDetails' /></section >
           break;
         case 'Customers':
           console.log('inside switch customers');
-          this.display = <section className="d-flex w-100" id="CustomerDetails"> <CustomerDetails /> </section >
+          this.display =<Filter setSectionContent={this.setSectionContent.bind(this)}  filterType = {'Customers'}/>
           break;
         default:
           // code block
@@ -44,7 +55,7 @@ export class Transforming extends Component {
           
           <div className="d-flex flex-row">
               {/* SIDEBAR */}
-            <SideBar getcontent = {this.getContent}/>
+            <SideBar setSidebarContent = {this.setSidebarContent}/>
             {/* ReacT Components */}
             {this.display} 
             {/* <section className="  w-100" id="SalesOrderDetails" /> */}

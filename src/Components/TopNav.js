@@ -11,7 +11,7 @@ export class TopNav extends Component {
             </span></button>
           <div   className="collapse navbar-collapse" id="topbarnav">
             <ul   className="navbar-nav mr-auto">
-              <li   className="itemtop nav-item dropdown">
+            <li   className="itemtop nav-item dropdown">
                 <a href="google.com"  className="plusontop nav-link" id="adddropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <img src="plus.png"  className="my-auto plusimg" alt="wide.jpeg" />
                 </a>
@@ -26,6 +26,7 @@ export class TopNav extends Component {
               <li   className="itemtop nav-item active">
                 <a   className="nav-link" href="google.com">Home <span   className="sr-only" /></a>
               </li>
+              
               <li   className="itemtop nav-item">
                 <a   className="nav-link" href="google.com">Link</a>
               </li>

@@ -8,7 +8,7 @@ export class SideBar extends Component {
   sendContent = (e) => {
     e.preventDefault()
     console.log("called",e.target.innerText);
-    this.props.getcontent(e.target.innerText)
+    this.props.setSidebarContent(e.target.innerText)
   }
     render() {
         return (

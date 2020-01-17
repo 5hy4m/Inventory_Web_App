@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import '../css/CustomerDetails.css'
+import '../css/Details.css'
 
-export class CustomerDetails extends Component {
+export class Details extends Component {
     render() {
         return (
             <div className="content p-0 d-flex flex-fill col-xs-12">
@@ -11,9 +11,6 @@ export class CustomerDetails extends Component {
                     All Customers
                   </button>
                   <div className="dropdown-menu">
-                    {/* <a className="dropdown-item" href="google.com">Link 1</a>
-                    <a className="dropdown-item" href="google.com">Link 2</a>
-                    <a className="dropdown-item" href="google.com">Link 3</a> */}
                   </div>
                 </div>
                 <div className="customerlist d-flex font-weight-bold overflow-scroll ">
@@ -85,4 +82,4 @@ export class CustomerDetails extends Component {
     }
 }
 
-export default CustomerDetails
+export default Details
