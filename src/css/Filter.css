@@ -11,6 +11,37 @@
     border-right:solid rgb(216, 216, 212) 2px;
   }
 
+  .tableBarSearchBox{
+    height: 75%;
+    margin-top:4px;
+  }
+  .serachbutton{
+    height: 75%;
+    /* max-width:30px; */
+    margin-top:4px;
+    position: initial !important;
+  }
+  .navbar-nav .dropdown-menu {
+    position:absolute !important;
+  }
+
+  #dropdowninfilterbar{
+    background-color: #f4fa9c;
+  }
+
+  #outlinebutton,.outlinebutton{
+    color: #ff1f62 !important;
+    border-color: #ff1f62 !important;
+  }
+  #outlinebutton:hover,.outlinebutton:hover{
+    background-image: linear-gradient(to right, rgb(236, 0, 140), rgb(252, 103, 103)) !important;
+      /* background-image: #ff1f62; */
+      color: white !important;
+  }
+
+
+
+
   .filterbar > .navbar > ul > li{
     height: 40px;
   }

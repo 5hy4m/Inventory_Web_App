@@ -9,7 +9,7 @@ export class RecentlySold extends React.Component {
 
     render() {
         return (
-            <div className="card  m-2 col-xl-7 col-md-6 col-sm-12 col-11 p-0" style={{width: '18rem'}}>
+            <div className="card zoom m-2 col-xl-7 col-md-6 col-sm-12 col-11 p-0" style={{width: '18rem'}}>
                 <div className="card-body shadow rounded">
                     <h2 className="card-title">Recently Sold Products</h2>
                     <table className="table">

@@ -22,7 +22,7 @@
       background-color: #f4fa9c;
     } */
 
-    header > nav > a,.itemtop > a,.itemside > a{
+    header > nav > a,.itemtop > a,.itemside >  a{
       color:  #f1f1f1 !important;
     } 
     .dropdown-menu{

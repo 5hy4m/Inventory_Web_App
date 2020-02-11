@@ -40,7 +40,7 @@ class ItemModel extends Component {
               
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary">Save changes</button>
+                <button type="button" className="btn buttonmodal">Save changes</button>
               </div>
             </form>
           </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import '../../css/modal.css'
 export default class CustomerModel extends React.Component {
 
   render() {
@@ -17,7 +17,7 @@ export default class CustomerModel extends React.Component {
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" className="btn btn-primary">Save changes</button>
+              <button type="button" className=" buttonmodal">Save changes</button>
             </div>
           </div>
         </div>

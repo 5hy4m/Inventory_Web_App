@@ -1,0 +1,16 @@
+.modal-content{
+    background-image: linear-gradient(to right, rgb(66, 39, 90), rgb(115, 75, 109));
+}
+.modal-header{
+    color: #e21351;
+}
+
+.buttonmodal{
+        color: #ff1f62;
+        border-color: #ff1f62;
+      }
+.buttonmodal:hover{
+background-image: linear-gradient(to right, rgb(236, 0, 140), rgb(252, 103, 103));
+    /* background-image: #ff1f62; */
+    color: white;
+}

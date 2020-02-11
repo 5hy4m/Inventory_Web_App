@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import '../../css/ProductDetails.css'
 import { BoxLoading } from 'react-loadingg';
 
 class ProductDetails extends React.Component {
@@ -20,7 +20,8 @@ class ProductDetails extends React.Component {
           this.setState({
           loading:false,
           products:response.data,
-        });});
+        });
+      });
         await axios.get("http://127.0.0.1:8000/productgroup/").then(response => {
         this.loading = false;  
         this.setState({
@@ -38,13 +39,13 @@ class ProductDetails extends React.Component {
         var group = <BoxLoading color="black" />
       }
       else{
-        console.log(this.state.products);  
+        // console.log(this.state.products);  
         product = this.state.products.length
         group = this.state.groups.length
       }
         return(
-            <div className="card shadow rounded m-2 col-xl-4 col-md-5 col-sm-12 col-11 p-0" style={{width: '18rem'}}>
-              <div className="card-body ">
+            <div className="card zoom shadow rounded m-2 col-xl-4 col-md-5 col-sm-12 col-11 p-0" style={{width: '18rem'}}>
+              <div className="card-body">
                 <h2 className="card-title">Product Details</h2>
                 <ul className="list-group list-group-flush">
               <li className="list-group-item">

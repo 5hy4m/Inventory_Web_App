@@ -8,8 +8,8 @@ import * as serviceWorker from './serviceWorker';
 
 
 // ReactDOM.render(<App />, document.getElementById('dashboard'));
-ReactDOM.render(<Transforming />, document.getElementById('root'));
 
+ReactDOM.render(<Transforming />, document.getElementById('root'));
 
  
 

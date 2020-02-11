@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../css/Details.css'
+import '../../css/Details.css'
 
 export class Details extends Component {
     render() {

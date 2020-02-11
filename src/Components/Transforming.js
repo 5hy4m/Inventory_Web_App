@@ -1,74 +1,71 @@
 import React, { Component } from 'react'
-import CustomerModel from './CustomerModel';
-import InvoiceModel from './InvoiceModel';
-import ItemModel from './ItemModel';
+
+import CustomerModel from './Modals/CustomerModel';
+import InvoiceModel from './Modals/InvoiceModel';
+import ItemModel from './Modals/ItemModel';
+
 import SideBar from './SideBar';
 import Footer from  './Footer';
 import TopNav from './TopNav';
-import DashBoard from './DashBoard';
-import Details from './Details';
-import Filter from './Filter';
+import DashBoard from './Dashboard/DashBoard';
+import Details from './Details/Details';
+// import Filter from './Filter/Filter';
+import Filter from './FunctionalFilter/Filter';
+import { BrowserRouter as Router,Route,Switch } from 'react-router-dom';
 
 export class Transforming extends Component {
-  constructor(){
-    super();
-    this.state = {
-      content : 'Dashboard'
+  constructor(props){
+    super(props);
+    this.state={
+      content:"Dashboard"
     }
+    // this.setSidebarContent = this.setSidebarContent.bind(this)
   }
-
-setSidebarContent = (childData) => {
-    this.setState({content: childData})
-    console.log(childData);
-}
-
-setSectionContent = (childData) =>{
-this.setState({
-  content:'CustomerDetails',
-})
-}
-
-
-    render() {
-      switch(this.state.content) {
-        case 'Dashboard':
-          // console.log('content dec');
-          this.display = <section name="content" className="d-flex  w-100"><DashBoard /></section >
-          break;
-        case 'CustomerDetails':
-          // console.log('content dec');
-          this.display = <section name="content" className="d-flex  w-100"><Details detailsType='CustomerDetails' /></section >
-          break;
-        case 'Customers':
-          console.log('inside switch customers');
-          this.display =<Filter setSectionContent={this.setSectionContent.bind(this)}  filterType = {'Customers'}/>
-          break;
-        default:
-          // code block
-      }
-       
+  //  setSidebarContent(data){
+  //   this.setState({
+  //     content:data
+  //   })
+  // }
+    render() { 
+      
         return (
-            <div>
-                {/* TopNav */}
-                <TopNav />
-        <div className="d-flex flex-column">
-          
-          <div className="d-flex flex-row">
-              {/* SIDEBAR */}
-            <SideBar setSidebarContent = {this.setSidebarContent}/>
-            {/* ReacT Components */}
-            {this.display} 
-            {/* <section className="  w-100" id="SalesOrderDetails" /> */}
-          </div>
-          {/* Bootstrap Models */}
-          <CustomerModel />
-          <ItemModel />
-          <InvoiceModel />
-        </div>
-        <Footer />
-      </div>
+          <Router>          
+                      <div>
+                      {/* TopNav */}
+                      <TopNav />
+              <div className="d-flex flex-column">
+                <div className="d-flex flex-row">
+                    {/* SIDEBAR */}
+                    
+                  <SideBar setSidebarContent = {this.setSidebarContent}/>
+                    <Switch>
+                      <Route path="/" exact render={()=><section name="content" className="d-flex  w-100"><DashBoard/></section >}/>
+                      <Route  path="/CustomerDetails" render={(props) =><section name="content" className="d-flex  w-100"><Details {...props} filterType={"CustomerDetails"}/></section >}/>
+                      <Route  path="/customer" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
+                      <Route  path="/salesorder" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
+                      <Route  path="/vendor" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
+                      <Route  path="/purchaseorder" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
+                      <Route  path="/bill" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
+                      <Route  path="/invoice" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
+                      <Route  path="/product" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
+                    {/* {this.content}  */}
+                    </Switch>
+                  
+
+                </div>
+
+                {/* Bootstrap Models */}
+                <CustomerModel />
+                <ItemModel />
+                <InvoiceModel />
+              </div>
+              <Footer />
+            </div>
+            </Router>
         )
     }
 }
 
-export default Transforming
+
+
+export default (Transforming);
