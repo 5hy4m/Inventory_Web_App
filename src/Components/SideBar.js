@@ -35,18 +35,18 @@ export class SideBar extends Component {
               Items DROPDOWn 
             </a>
             <div   className="  w-100 collapse" id="collapse1"  data-parent="#accordionExample" aria-labelledby="#accordionExample" aria-controls="collapse1">
-              <a    onClick = {(e)=>this.sendContent(e)} id="product"  className="dropdown-item py-auto nav-link txt-center  " href="google.com">
-               Items
+            <Link  to ="/product"    onClick = {(e)=>this.sendContent(e)} id="product"  className="dropdown-item py-auto nav-link txt-center  " href="google.com">
+                 Items
                <button   className="itemside btn boton" data-toggle="tooltip" data-placement="right" title="Tooltip on top">
                  <img src="plus.png" alt = 'wide.jpeg'   className="my-auto plusimg"   />
                </button>
-              </a>
-              <a    onClick = {(e)=>this.sendContent(e)} id="productgroup"  className="dropdown-item py-auto nav-link txt-center flex-grow-1 " href="google.com">
+               </Link>
+              <Link to='/productgroup'  onClick = {(e)=>this.sendContent(e)} id="productgroup"  className="dropdown-item py-auto nav-link txt-center flex-grow-1 " href="google.com">
                Item Groups
                <button   className="itemside btn boton" data-toggle="tooltip" data-placement="right" title="Tooltip on top">
                  <img src="plus.png" alt = 'wide.jpeg'  className="my-auto plusimg"   />
                </button>
-              </a>
+               </Link>
             </div>
            </li>
            {/* </Link> */}

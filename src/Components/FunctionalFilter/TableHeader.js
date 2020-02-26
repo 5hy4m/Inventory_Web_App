@@ -1,6 +1,6 @@
-import React,{useContext,useState,useEffect} from 'react';
-import {Context} from './Filter';
+import React,{useContext,useState} from 'react';
 import { RectGraduallyShowLoading } from 'react-loadingg';
+import {Context} from './Filter';
 
 function TableHeader() {
     const context = useContext(Context);
@@ -11,13 +11,10 @@ function TableHeader() {
         fname.push(header.fname)
     });
 
-useEffect(()=>{
-    setToggle(!toggleSort);
-},[context.sortColumn])
-
 
 function handleSorting(e){
     e.preventDefault();
+    setToggle(!toggleSort);
     context.sortdata({
         bname:context.headers[e.target.id].bname,
         fname:context.headers[e.target.id].fname,

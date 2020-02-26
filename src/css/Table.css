@@ -1,0 +1,91 @@
+.inputbox{
+    background-color: #212529;
+    color:#d81d55;
+    border:none;
+    width:80px;
+}
+
+.inputanddropbox{
+    background-color: #212529;
+    color:#d81d55;
+    border:none;
+    width:40px;
+    
+}
+
+.addbutton , .deleteButton,.calculatebutton{
+    height:30px;
+    position: relative;
+}
+
+#amount > input , #rate > input , #quantity > input{
+    width:100%
+}
+
+.listamt{
+    float:right !important;
+    width: 1600px;
+    right:1600px;
+}
+
+.listamt > li {
+    padding-right:2px;
+}
+
+.selectadjustment{
+    float:right;
+    width:40px;
+    margin-right:6px;
+    border: none;
+    background-color: #DCE48A;
+}
+
+.adjustment{
+    float: left;
+    width:92px;
+    margin-left:26px;
+    border: none;
+    background-color: #DCE48A;
+}
+
+.subtotalinput{
+    float: right;
+    width:92px;
+    border: none;
+    background-color: #DCE48A;
+}
+
+.calculatebutton{
+    margin-right:20%;
+    margin-left:16px !important;
+}
+.deleteButton{
+    position: relative;
+    /* margin-right: 200px; */
+}
+
+.textareafromtable{
+    background-color: #d81d55 !important;
+    width:100%;
+    height:60px;
+}
+
+
+.formtablecell{
+    padding-bottom: 1px;
+    position: relative;
+    font-family: Arial;
+    color:#d81d55;
+    background-color: #212529 !important ;
+    border: #212529;
+    max-width:100%;
+    max-height:100% !important;
+    /* margin:0; */
+    
+}
+
+.modalbutton{
+    background-color: #212529;
+    color:#d81d55;
+  
+}

@@ -349,8 +349,7 @@ useEffect(() => {
     }
 }
 fetchData();
-}, [])
-
+}, [props.filterType])
 
     return (
         <Context.Provider 

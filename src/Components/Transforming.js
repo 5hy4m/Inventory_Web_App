@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import CustomerModel from './Modals/CustomerModel';
-import InvoiceModel from './Modals/InvoiceModel';
+import SalesOrderModel from './Modals/SalesOrderModel';
 import ItemModel from './Modals/ItemModel';
 
 import SideBar from './SideBar';
@@ -9,9 +9,10 @@ import Footer from  './Footer';
 import TopNav from './TopNav';
 import DashBoard from './Dashboard/DashBoard';
 import Details from './Details/Details';
-// import Filter from './Filter/Filter';
 import Filter from './FunctionalFilter/Filter';
 import { BrowserRouter as Router,Route,Switch } from 'react-router-dom';
+
+export const ModelContext = React.createContext();
 
 export class Transforming extends Component {
   constructor(props){
@@ -19,13 +20,8 @@ export class Transforming extends Component {
     this.state={
       content:"Dashboard"
     }
-    // this.setSidebarContent = this.setSidebarContent.bind(this)
   }
-  //  setSidebarContent(data){
-  //   this.setState({
-  //     content:data
-  //   })
-  // }
+
     render() { 
       
         return (
@@ -40,14 +36,15 @@ export class Transforming extends Component {
                   <SideBar setSidebarContent = {this.setSidebarContent}/>
                     <Switch>
                       <Route path="/" exact render={()=><section name="content" className="d-flex  w-100"><DashBoard/></section >}/>
-                      <Route  path="/CustomerDetails" render={(props) =><section name="content" className="d-flex  w-100"><Details {...props} filterType={"CustomerDetails"}/></section >}/>
-                      <Route  path="/customer" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
-                      <Route  path="/salesorder" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
-                      <Route  path="/vendor" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
-                      <Route  path="/purchaseorder" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
-                      <Route  path="/bill" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
-                      <Route  path="/invoice" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
-                      <Route  path="/product" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
+                      <Route path="/customerDetails" render={(props) =><section name="content" className="d-flex  w-100"><Details {...props} filterType={"customer"}/></section >}/>
+                      <Route path="/customer" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
+                      <Route path="/product" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
+                      <Route path="/salesorder" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
+                      <Route path="/vendor" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
+                      <Route path="/purchaseorder" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
+                      <Route path="/bill" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
+                      <Route path="/invoice" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
+                      <Route path="/productgroup" render={(props) =><Filter {...props} filterType={props.match.path.slice(1)}/>}/>
                     {/* {this.content}  */}
                     </Switch>
                   
@@ -55,9 +52,23 @@ export class Transforming extends Component {
                 </div>
 
                 {/* Bootstrap Models */}
-                <CustomerModel />
-                <ItemModel />
-                <InvoiceModel />
+                <ModelContext.Provider 
+                    value = {{
+                        // headers:this.state.headers,
+                        // details:state.columns,
+                        // searchbardata:(data)=>searchBarCallBack(data),
+                        // query:state.query,
+                        // searchColumn:state.searchColumn,
+                        // sortdata:(data)=>sortinfoCallBack(data),
+                        // sortColumn:state.sortColumn,
+                        // loading:state.loading,
+                        // error:state.error,
+                        // content:props.filterType
+                        }}>
+                    <CustomerModel />
+                    <ItemModel />
+                    <SalesOrderModel />
+                </ModelContext.Provider>
               </div>
               <Footer />
             </div>

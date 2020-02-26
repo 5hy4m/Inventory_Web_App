@@ -18,8 +18,8 @@ export class TopNav extends Component {
                 <div   className="dropdown-menu" aria-labelledby="adddropdown">
                   <a   className="dropdown-item" href="google.com" data-toggle="modal" data-target=".newcustomer-modal-xl">Add New
                     Customer</a>
-                  <a   className="dropdown-item" href="google.com" data-toggle="modal" data-target=".newinvoice-modal-xl">Add New
-                    Invoice</a>
+                  <a   className="dropdown-item" href="google.com" data-toggle="modal" data-target=".newSalesOrder-modal-lg">Add New
+                    SalesOrder</a>
                   <a   className="dropdown-item" href="google.com" data-toggle="modal" data-target=".newitem-modal-xl">Add New Item</a>
                 </div>
               </li>

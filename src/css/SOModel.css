@@ -1,0 +1,28 @@
+#itemdetails{
+    width:700px;
+    /* background-color: White !important; */
+}
+
+.formtableList{
+    height:80px !important ;
+}
+
+.formtable > thead > tr >th,.formtable > tbody > tr >td{
+    border:#d81d55 solid 2px;
+}
+
+#quantity,#rate,#discount,#amount{
+    width:100px;
+}
+
+.sticky{
+    border:solid #f4fa9c 10px;
+    background-image: linear-gradient(to right, rgb(236, 0, 140), rgb(252, 103, 103));
+    text-align: center;
+    height:100px;
+    margin-top: 2px;
+    width:450px;
+    float :right;
+}
+
+

@@ -1,7 +1,7 @@
 import React,{useContext,useState,useEffect} from 'react';
 import {Context} from './Filter';
 import { RectGraduallyShowLoading } from 'react-loadingg';
-
+import {Link}from 'react-router-dom';
 
 function TableBody() {
 const context = useContext(Context);
@@ -9,15 +9,16 @@ const [tablebody,setTableBody] = useState( <tr><td></td></tr>);
 
 // actual filtering process takes place here
 function filtering(detail){
-  // console.log(detail);
+  // console.log(detail)
   // console.log(context);
   
-if(isNaN(context.searchColumn.fname !== "" && detail[context.searchColumn.bname])){
+// if(isNaN(context.searchColumn.fname !== "" && detail[context.searchColumn.bname] !== undefined)){
+  if(detail[context.searchColumn.bname] !== undefined && isNaN(detail[context.searchColumn.bname])){
+  // console.log(detail[context.searchColumn.bname]);
   return detail[context.searchColumn.bname].toUpperCase().indexOf(context.query.toUpperCase()) !== -1;
 }else if (context.searchColumn.fname !== ""){
   return String(detail[context.searchColumn.bname]).indexOf(context.query) !== -1; 
 }}
-console.log(context.details);
 
 var filteredDetails = context.details.filter((detail)=>filtering(detail));
 
@@ -38,7 +39,7 @@ function sorter(list,type){
     }else{
       if (nameA > nameB) //sort desc string ascending
         return -1 
-    if (nameA > nameB)
+    if (nameA < nameB)
         return 1
     }
     return 0 //default return value (no sorting)
@@ -47,17 +48,26 @@ function sorter(list,type){
 
 // List Builder helps to render elements 
 function listBuilder(list){
-  function builder(detail,index){
-    console.log(detail.customer_id);
-    // console.log(context.headers);
-  
-    const builder = <tr className = "d-flex justify-content-between" key={index} id = {index}>
-    {context.headers.map((header,index)=><td key={index} className = "w-100 tablecell">{detail[header.bname]}</td>)}
-      </tr>
-    return builder
-  }
     return list.map((detail,index) => builder(detail,index))
-}
+    function builder(detail,index){
+      const bodyBuilder = <tr className = "d-flex justify-content-between" key={index} id = {index}>
+          {context.headers.map((header,index)=><Link 
+          style={{color:'#d81d55'}} 
+          to ={{
+            pathname:`${context.content}Details`,
+            state:{
+              content:context.content,
+              list,
+              detail,
+            }
+        }} 
+          key={index} className = "w-100 tablecell">
+            {detail[header.bname]}
+        </Link>)}
+        </tr>
+      return bodyBuilder
+    }
+  }
 
 
 useEffect(()=>{
@@ -72,10 +82,13 @@ useEffect(()=>{
                   <td className = "w-100 tablecell">{context.error}</td>
                 </tr>);
   }else{
+    console.log(context);
     setTableBody(listBuilder(filteredDetails));
   }
   // SORTING
   // IF Context.sortColumn is undefined and ascending
+  console.log(context.sortColumn);
+  
 if(context.sortColumn && context.sortColumn.asc){
     // console.log("SORTDATA : ",context.sortColumn);
     var sortedbody = sorter(filteredDetails,context.sortColumn.asc);

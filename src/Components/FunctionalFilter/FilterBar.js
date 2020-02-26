@@ -1,5 +1,5 @@
 import React,{useContext} from 'react'
-import { BoxLoading } from 'react-loadingg';
+// import { BoxLoading } from 'react-loadingg';
 import {Context} from './Filter';
 
 function FilterBar(props) {
@@ -42,13 +42,13 @@ context.headers.forEach(header => {
         var searchableColumns = ()=>
           <a href="aa"
              className="dropdown-item">
-                <BoxLoading/>
+                {/* <BoxLoading/> */}
           </a>;
       }else if(context.error !== ''){
         searchableColumns =()=>
         <a href="aa"
            className="dropdown-item">
-              <BoxLoading/>
+              {/* <BoxLoading/> */}
         </a>;
       }else{
       searchableColumns = fname.map((header,index)=>  
@@ -77,7 +77,7 @@ context.headers.forEach(header => {
               <ul className=" navbar-nav flex-row ml-auto">
                 {/* SearchBAr */}
                 <li className = "input-group  mr-2 ">
-                  <input className=" outlinebutton form-control tableBarSearchBox" onChange={(e)=>searchBar(e)} type="search" placeholder="Search" aria-label="Search" />
+                  <input className="outlinebutton form-control tableBarSearchBox" onChange={(e)=>searchBar(e)} type="search" placeholder="Search" aria-label="Search" />
                   <div className="dropdown nav-item">
                     <button className="btn serachbutton outlinebutton dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" ></button>
                     <div className="dropdown-menu dropdown-menu-right"  aria-labelledby="dropdownMenuButton">

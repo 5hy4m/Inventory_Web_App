@@ -6,6 +6,9 @@ import { BoxLoading } from 'react-loadingg';
 class ProductDetails extends React.Component {
     constructor(){
             super();
+            this.productSource = axios.CancelToken.source();
+            this.productGroupsource = axios.CancelToken.source();
+
             this.loading = true
             // console.log("Constructor",this);
             this.state = {
@@ -16,19 +19,24 @@ class ProductDetails extends React.Component {
           }
         
         async componentDidMount() {
-         await axios.get("http://127.0.0.1:8000/product/").then(response => {
+         await axios.get("http://127.0.0.1:8000/product/",{cancelToken:this.productSource.token }).then(response => {
           this.setState({
           loading:false,
           products:response.data,
         });
       });
-        await axios.get("http://127.0.0.1:8000/productgroup/").then(response => {
+        await axios.get("http://127.0.0.1:8000/productgroup/",{cancelToken:this.productGroupsource.token }).then(response => {
         this.loading = false;  
         this.setState({
             loading:false,
             groups:response.data,
           });
         });
+        }
+
+        componentWillUnmount(){
+          this.productGroupsource.cancel();
+          this.productSource.cancel();
         }
               
 

@@ -10,13 +10,14 @@ const filterReducer =(state,action)=>{
                     {bname:'customer_name',fname:'Name'},
                     {bname:"phone_no",fname:'Phone No'},
                     {bname:"email",fname:'Email'},
-                    {bname:"outstanding_recievables",fname:'Outstanding Recievables'}
+                    {bname:"recievables",fname:'Outstanding Recievables'}
             ],
                 columns:action.payload,
                 error:'',
                 query:state.query,
                 searchColumn: {bname:'customer_name',fname:'Name'},
                 sortColumn: {bname:'customer_name',fname:'Name',asc:true},
+                
             };
         case 'salesorder':
             console.log("Fetched DATA : ",action.payload);
@@ -25,7 +26,7 @@ const filterReducer =(state,action)=>{
                 headers:[
                     {bname:"sales_order_date",fname:'DATE'},
                     {bname:'sales_order_no',fname:'SALES ORDER#'},
-                    {bname:"customer_id",fname:'CUSTOMER NAME'},
+                    {bname:"customer_name",fname:'CUSTOMER NAME'},
                     {bname:"sales_order_status",fname:'ORDER STATUS'},
             ],
                 columns:action.payload,
@@ -33,6 +34,7 @@ const filterReducer =(state,action)=>{
                 query:state.query,
                 searchColumn:{bname:"sales_order_date",fname:'DATE'},
                 sortColumn:{bname:"sales_order_date",fname:'DATE',asc:true},
+                
             };
         case 'purchaseorder':
             console.log("Fetched DATA : ",action.payload);
@@ -42,12 +44,14 @@ const filterReducer =(state,action)=>{
                     {bname:'purchase_date',fname:'DATE'},
                     {bname:"purchase_order_no",fname:' PURCHASE ORDER#'},
                     {bname:"purchase_order_status",fname:'ORDER STATUS'},
+                    {bname:'vendor_name',fname:'VENDOR NAME'}
             ],
                 columns:action.payload,
                 error:'',
                 query:state.query,
                 searchColumn:{bname:'purchase_date',fname:'DATE'},
                 sortColumn:{bname:'purchase_date',fname:'DATE',asc:true},
+                
             };
         case 'vendor':
             console.log("Fetched DATA : ",action.payload);
@@ -57,13 +61,14 @@ const filterReducer =(state,action)=>{
                     {bname:'vendor_name',fname:'NAME'},
                     {bname:"vendor_phno",fname:'Phone No'},
                     {bname:"vendor_email",fname:'Email'},
-                    {bname:"outstanding_payables",fname:'Outstanding Payables'}
+                    {bname:"payables",fname:'Outstanding Payables'}
             ],
                 columns:action.payload,
                 error:'',
                 query:state.query,
-                searchColumn:state.searchColumn,
-                sortColumn:state.SortColumn
+                searchColumn:{bname:'vendor_name',fname:'NAME'},
+                sortColumn:{bname:'vendor_name',fname:'NAME',asc:true},
+                
             };
         case 'bill':
             console.log("Fetched DATA : ",action.payload);
@@ -73,28 +78,68 @@ const filterReducer =(state,action)=>{
                     {bname:'bill_date',fname:'DATE'},
                     {bname:"bill_no",fname:' BILL#'},
                     {bname:"bill_status",fname:'BILL STATUS'},
+                    {bname:"due_date",fname:' DUE DATE'},
+                    {bname:"vendor_name",fname:'VENDOR NAME'},
             ],
                 columns:action.payload,
                 error:'',
                 query:state.query,
                 searchColumn:{bname:'bill_date',fname:'DATE'},
-                sortColumn:{bname:'bill_date',fname:'DATE',asc:true}
+                sortColumn:{bname:'bill_date',fname:'DATE',asc:true},
+                
             };
         case 'invoice':
             console.log("Fetched DATA : ",action.payload);
             return {
                 loading:false,
                 headers:[
-                    {bname:'customer_name',fname:'Name'},
-                    {bname:"phone_no",fname:'Phone No'},
-                    {bname:"email",fname:'Email'},
-                    {bname:"outstanding_recievables",fname:'Outstanding Recievables'}
+                    {bname:"invoice_date",fname:'DATE'},
+                    {bname:"invoice_no",fname:'INVOICE#'},
+                    {bname:"due_date",fname:'DUE DATE'},
+                    {bname:"customer_name",fname:'Customer Name'},
+                    {bname:"invoice_status",fname:'Status'}
             ],
                 columns:action.payload,
                 error:'',
                 query:state.query,
-                searchColumn:state.searchColumn,
-                sortColumn:state.SortColumn
+                searchColumn:{bname:'invoice_date',fname:'DATE'},
+                sortColumn:{bname:'invoice_date',fname:'DATE',asc:true},
+                
+            };
+        case 'product':
+            console.log("Fetched DATA : ",action.payload);
+            return {
+                loading:false,
+                headers:[
+                    {bname:"product_name",fname:'NAME'},
+                    {bname:"group_name",fname:'GROUP NAME'},
+                    {bname:"stockOnHand",fname:'STOCK ON HAND'},
+                    {bname:"unit",fname:'UNIT'},
+                    {bname:"selling_price",fname:'PRICE'},
+            ],
+                columns:action.payload,
+                error:'',
+                query:state.query,
+                searchColumn:{bname:"product_name",fname:'NAME'},
+                sortColumn:{bname:"product_name",fname:'NAME',asc:true},
+                
+            };
+        case 'productgroup':
+            console.log("Fetched DATA : ",action.payload);
+            return {
+                loading:false,
+                headers:[
+                    {bname:"group_name",fname:'GROUP NAME'},
+                    {bname:"stockOnHand",fname:'STOCK ON HAND'},
+                    {bname:"unit",fname:'UNIT'},
+                    {bname:"value",fname:'ATTRIBUTE'},
+            ],
+                columns:action.payload,
+                error:'',
+                query:state.query,
+                searchColumn:{bname:"product_name",fname:'NAME'},
+                sortColumn:{bname:"product_name",fname:'NAME'},
+                
             };
         case 'FETCH_ERROR':
             return {
@@ -105,6 +150,7 @@ const filterReducer =(state,action)=>{
                 query:state.query,
                 searchColumn:state.searchColumn,
                 sortColumn:state.SortColumn,
+                
             }
         case 'SEARCHBAR':
             return{
@@ -115,6 +161,7 @@ const filterReducer =(state,action)=>{
                 query:action.payload.query,
                 searchColumn:action.payload.searchColumn,
                 sortColumn:state.SortColumn,
+                
             }
         case 'SORTING':
             return{
@@ -125,7 +172,19 @@ const filterReducer =(state,action)=>{
                 query:state.query,
                 searchColumn:state.searchColumn,
                 sortColumn:action.payload,
+                
             }
+            case '#number':
+                return{
+                    headers:state.headers,
+                    loading:state.loading,
+                    columns:state.columns,
+                    error:state.error,
+                    query:state.query,
+                    searchColumn:state.searchColumn,
+                    sortColumn:state.sortColumn,
+                    
+                }
             default:
             return state
     }
