@@ -3,57 +3,99 @@ import  '../../css/SOModel.css'
 import '../../css/Table.css'
 
 function Table(props) { 
-    const[value,setValue] = useState({value0:0});
-    const[qvalue,setQvalue] = useState({qvalue0:1.00});
-    const[avalue,setAvalue] = useState({avalue0:0});
-    const[dvalue,setDvalue] = useState({dvalue0:0});
-    const[dtype,setDtype] = useState({dtype0:"%"});
-    const[rvalue,setRvalue] = useState({rvalue0:0});
+    let product_id = [];
+    let q = {}
+    let r= {}
+    let dt = {}
+    let d = {}
+    let a={}
+    let adjus = {}
+    let adt = {}
+    let subtotal = {}
+    let total = {}
+    let s_o_h = {}
+    var editviewproducts = []
+    let noofrows=[]
+
+    props.tabledata.sales_products.forEach((element,index) => {
+      product_id = [...product_id,{[`value${index}`]:element.product_id}]
+      q = {...q,[`qvalue${index}`]:element.quantity}
+      r = {...r,[`rvalue${index}`]:element.rate}
+      dt = {...dt,[`dtype${index}`]:element.discount_type}
+      a = {...a,[`avalue${index}`]:element.amount}  
+      d = {...d,[`dvalue${index}`]:element.discount_value}
+      if(props.tabledata.sales_products.length != index)
+        noofrows = [...noofrows,[index]]
+    });
+    console.log(product_id);
+    
+    editviewproducts = product_id.map((x)=>{
+      return props.items.filter((item)=>{
+        return item.product_id === Object.values(x)[0]
+      })[0]
+    });
+    console.log(editviewproducts);
+    editviewproducts.map((ele,index)=>{
+      s_o_h = {...s_o_h,[`soh${index}`]:props.items.filter((x)=>x.product_id === ele.product_id)[0].stocks.quantity}
+    })
+
+    console.log(s_o_h);
+    
+    adjus = props.tabledata.adjustment_value
+    adt = props.tabledata.adjustment
+    subtotal = props.tabledata.subtotal
+    total = props.tabledata.total
+    // console.log(product_id);
+    const[value,setValue] = useState(product_id);
+    const[qvalue,setQvalue] = useState(q);
+    const[avalue,setAvalue] = useState(a);
+    const[dvalue,setDvalue] = useState(d);
+    const[dtype,setDtype] = useState(dt);
+    const[rvalue,setRvalue] = useState(r);
     const[description,setDescription]=useState('');
-    const[row,setRow] = useState([0]);
-    const[soh,setSoh] = useState("-"); // Stock On hand
+    const[row,setRow] = useState(noofrows);
+    const[soh,setSoh] = useState(s_o_h); // Stock On hand
     // const[nvalue,setName] = useState({nvalue0:'Select The Item'}); 
-    const[subtot,setSubTot] = useState(0);
-    const[tvalue,setTvalue] = useState(0);
-    const[adjtype,setAdjType] = useState('');
-    const[adj,setAdj] = useState(0)
+    const[subtot,setSubTot] = useState(subtotal);
+    const[tvalue,setTvalue] = useState(total);
+    const[adjtype,setAdjType] = useState(adt);
+    const[adj,setAdj] = useState(adjus)
     
-    useEffect(()=>{
-      if(props.reset === true){
-        const len = Object.keys(value).length
-        for (let i=0;i<len-1;i++){
-          handleDeleteRow();
-        }
-        console.log('reseting');
-        setValue({value0:0});
-        setQvalue({qvalue0:1.00})
-        setAvalue({avalue0:0})
-        setDvalue({dvalue0:0})
-        setDtype({dtype0:"%"})
-        setRvalue({rvalue0:0})
-        setDescription('')
-        setRow([0])
-        setSoh("-")
-        setSubTot(0)
-        setTvalue(0)
-        setAdjType('')
-        setAdj(0)
-      }},[props.reset]);
     
+
+useEffect(() => {
+  if(props.tabledata.sales_products.length >= 2){
+    props.tabledata.sales_products.forEach(() => {
+      setRow([...row,(parseInt(row[row.length - 1])+1)])
+    });
+}
+},[])
+
+useEffect(()=>{
+if(props.reset === true){
+  const len = Object.keys(value).length
+  for (let i=0;i<len-1;i++){
+    handleDeleteRow();
+  }
+  console.log('reseting');
+}},[props.reset]);
 
 function handleDvalueChange(e){
     // let tot = 0
+    console.log(dvalue);
     console.log('ID of row',e.target.id);
     const id = e.target.id
-    const discount = e.target.value
+    let discount = e.target.value
     console.log(qvalue,rvalue,avalue,dvalue,value,description);
+    if (discount === '')
+      discount = 0
     
-    setDvalue({...dvalue,[`dvalue${id}`]:discount})
+    setDvalue({...dvalue,[`dvalue${id}`]:parseFloat(discount)})
     
     if (dtype[`dtype${id}`] === '%' && discount!==0){
       // console.log(rvalue,qvalue,rvalue);
       // avalue = qvalue*rvalue*(dvalue/100)
-      setAvalue({...avalue,[`avalue${id}`]:(qvalue[`qvalue${id}`]*rvalue[`rvalue${id}`]) - (qvalue[`qvalue${id}`]*rvalue[`rvalue${id}`]*(discount/100))})
+      setAvalue({...avalue,[`avalue${id}`]:parseFloat((qvalue[`qvalue${id}`]*rvalue[`rvalue${id}`]) - (qvalue[`qvalue${id}`]*rvalue[`rvalue${id}`]*(discount/100)))})
     }else if(dtype[`dtype${id}`] === 'rs' && discount!==0){
       // avalue = qvalue*rvalue-dvalue
       setAvalue({...avalue,[`avalue${id}`]:(qvalue[`qvalue${id}`]*rvalue[`rvalue${id}`])-discount})
@@ -90,8 +132,45 @@ function handleRvalueChange(e){
         }}
     }
 
+function handleItemChange(e){
+      var id = parseInt(e.target.id)
+      let index = e.target.title
+      // console.log("FOR VALUE : ",index," Value : ",editviewproducts[index].product_desctiption);
 
-    function handleDtypeChange(e){
+      const val = e.target.value
+      const rate = props.items[e.target.value-1].selling_price;
+      const descript = props.items[e.target.value-1].product_description;
+      const discountType = '%';
+      const quantity = 1;
+      const discount = 0;
+      // let tot = 0
+      const stockonhand = props.items[e.target.value-1].stocks.quantity;
+      setValue([...value,{[`value${id}`]:parseInt(val)}]); 
+      editviewproducts.push(props.items.filter((x)=>x.product_id === val)[0])
+      setDescription({...description,[`description${id}`]:descript});
+      setRvalue({...rvalue,[`rvalue${id}`]:rate});
+      setDvalue({...dvalue,[`dvalue${id}`]:parseFloat(discount)});
+      setDtype({...dtype,[`dtype${id}`]:discountType});
+      setQvalue({...qvalue,[`qvalue${id}`]:quantity});
+      setSoh({...soh,[`soh${id}`]:stockonhand});
+      // setName({...name,[`name${id}`]:name});
+             
+      console.log(avalue,qvalue,rvalue,value)
+      if (discountType === '%' && discount!==0){
+   
+        setAvalue({...avalue,[`avalue${id}`]:(quantity*rate) - (quantity*rate*(discount/100))})
+
+      }else if(discountType === 'rs' && discount!==0){
+        setAvalue({...avalue,[`avalue${id}`]:(quantity*rate)-discount})
+    }
+      else if(quantity*rate-discount === NaN || discount === 0){
+          setAvalue({...avalue,[`avalue${id}`]:(quantity*rate)})
+        }
+
+    console.log(` Inside itemChange funtion Rate : ${rate} Quantity : ${qvalue[`qvalue${id}`]}`);
+  }
+
+function handleDtypeChange(e){
       // let tot = 0
       const id = e.target.id
       const discountType = e.target.name;
@@ -109,13 +188,9 @@ function handleRvalueChange(e){
 }
       else if(qvalue[`qvalue${id}`]*rvalue[`rvalue${id}`]-dvalue[`dvalue${id}`] === NaN || dvalue[`dvalue${id}`] === 0){
           setAvalue({...avalue,[`avalue${id}`]:(qvalue[`qvalue${id}`]*rvalue[`rvalue${id}`])})
-          // avalue = (qvalue*rvalue)
-          // avalue = 0
+
         }
-        // Object.keys(avalue).forEach((key,index)=>{
-        //   tot = tot+avalue[key]
-        // })
-        // setSubTot(tot)
+
     }
 
 function handleQvalueChange(e){
@@ -146,41 +221,6 @@ function handleQvalueChange(e){
         }}
   }
 
-function handleItemChange(e){
-      console.log(e.target.id);
-      var id = e.target.id
-      const val = e.target.value;
-      const rate = props.items[e.target.value-1].selling_price;
-      const descript = props.items[e.target.value-1].product_description;
-      const discountType = '%';
-      const quantity = 1;
-      const discount = 0;
-      // let tot = 0
-      const stockonhand = props.items[e.target.value-1].stocks.quantity;
-      setValue({...value,[`value${id}`]:val});    
-      setDescription({...description,[`description${id}`]:descript});
-      setRvalue({...rvalue,[`rvalue${id}`]:rate});
-      setDvalue({...dvalue,[`dvalue${id}`]:discount});
-      setDtype({...dtype,[`dtype${id}`]:discountType});
-      setQvalue({...qvalue,[`qvalue${id}`]:quantity});
-      setSoh({...soh,[`soh${id}`]:stockonhand});
-      // setName({...name,[`name${id}`]:name});
-             
-      console.log(avalue,qvalue,rvalue,value)
-      if (discountType === '%' && discount!==0){
-   
-        setAvalue({...avalue,[`avalue${id}`]:(quantity*rate) - (quantity*rate*(discount/100))})
-
-      }else if(discountType === 'rs' && discount!==0){
-        setAvalue({...avalue,[`avalue${id}`]:(quantity*rate)-discount})
-    }
-      else if(quantity*rate-discount === NaN || discount === 0){
-          setAvalue({...avalue,[`avalue${id}`]:(quantity*rate)})
-        }
-
-    console.log(` Inside itemChange funtion Rate : ${rate} Quantity : ${qvalue[`qvalue${id}`]}`);
-  }
-
 function handleDeleteRow(e,value){
     const rowid = row.length-1;
     if(rowid === 0){
@@ -188,8 +228,10 @@ function handleDeleteRow(e,value){
       return
     }
     
-    row.pop()
+    const removedrow = row.pop()
+    console.log(removedrow);
     const updatedRow = [...row]
+    if(Array.isArray(removedrow)){
     delete description[`description${rowid}`]
     delete rvalue[`rvalue${rowid}`]
     delete qvalue[`qvalue${rowid}`]
@@ -198,47 +240,52 @@ function handleDeleteRow(e,value){
     delete soh[`soh${rowid}`]
     delete avalue[`avalue${rowid}`]
     if(typeof value != "undefined" && value !== 'null'){
-      console.log(value);
-    delete value[`value${rowid}`]}
-    else{
-    // console.log(value);
-    
-  }
+      console.log("DELETING VALUE");
+    value.pop()
+    }
+}
   setRow(updatedRow);
-    setAvalue({...avalue})
-    setValue({...value})
-    setSoh({...soh})
-    setDtype({...dtype})
-    setDvalue({...dvalue})
-    setQvalue({...qvalue})
-    setRvalue({...rvalue});
-    setDescription({...description})
+  setAvalue({...avalue})
+  setValue([...value])
+  setSoh({...soh})
+  setDtype({...dtype})
+  setDvalue({...dvalue})
+  setQvalue({...qvalue})
+  setRvalue({...rvalue});
+  setDescription({...description})
   }
 
 function AddRow(e){
     // setValue({...value,[`value${e.target.id}`]:0})
-    setRow([...row,(row[row.length - 1]+1)])
-    }
+    console.log(row);
+    setRow([...row,(parseInt(row[row.length - 1])+1)])
+  }
   
 function calculateSubtot(){
-    let subtot = 0
+    let sub = 0
     let tot = 0
+    let v ={}
     Object.keys(avalue).forEach((key,index)=>{
-      subtot = parseFloat(subtot)+parseFloat(avalue[key])
+      console.log(Object.values(avalue));  
+      sub = parseFloat(sub)+parseFloat(avalue[key])
     })
-    setSubTot(subtot);
+    setSubTot(sub);
     if(adjtype === ''){
-      tot=subtot;
-      setTvalue(subtot);
+      tot=sub;
+      setTvalue(sub);
     }else if(adjtype === '+'){
-      tot=parseFloat(adj)+parseFloat(subtot);
-      setTvalue(parseFloat(adj)+parseFloat(subtot));
+      tot=parseFloat(adj)+parseFloat(sub);
+      setTvalue(parseFloat(adj)+parseFloat(sub));
     }else if(adjtype === '-'){
-      tot=parseFloat(subtot)-parseFloat(adj);
-      setTvalue(parseFloat(subtot)-parseFloat(adj));
+      tot=parseFloat(sub)-parseFloat(adj);
+      setTvalue(parseFloat(sub)-parseFloat(adj));
     }
-    props.setTableData({qvalue,rvalue,value,adj,adjtype,dvalue,avalue,dtype,subtot,tot});
-    
+    value.forEach(element => {
+      v={...v,[Object.keys(element)[0]]:Object.values(element)[0]}
+    });
+    // setValue({...v})
+    console.log(qvalue,v);
+    props.setTableData({qvalue,rvalue,v,adj,adjtype,dvalue,avalue,dtype,sub,tot});
   }
 
 function handleAdjType(e){
@@ -249,20 +296,16 @@ function handleAdjType(e){
 
 function handleAdj(e){
   console.log(e.target.value);
-  const val = parseFloat(e.target.value)
+  const val = e.target.value
   setAdj(val)
-  // if(adjtype === ''){
-  //   setTvalue(tvalue)
-  // }else if(adjtype === '+'){
-  //   setTvalue(parseFloat(adj)+parseFloat(tvalue))
-  // }else if(adjtype === '-'){
-  //   setTvalue(parseFloat(tvalue)-parseFloat(adj))
-  // }
   console.log(tvalue);
 }
 
+
+
+
 return (
-    <div className="mb-1">
+      <div className="mb-1">
         <table className="table formtable table-dark">
           <thead>
             <tr>
@@ -277,13 +320,18 @@ return (
             {row.map((x,index)=><tr id={index} key={index}>
               <td className=" formtablecell p-0">
                 <div className="">
-                  <select  id={x} name='product_id' onChange={(e)=>handleItemChange(e)} className="form-control formtablecell shadow rounded">
-                  {/* <option selected disabled hidden> Select the Item </option> */}
-                  <option selected disabled hidden> Select the Item </option>
-                    {props.items.map((item,index)=><option value={item.product_id} className = 'formtableList' key={index}>{item.product_name}</option>)}
+                  <select id={x} title={index} name='product_id' onChange={(e)=>handleItemChange(e)} className="form-control formtablecell shadow rounded">
+                  {/* <option selected disabled hidden> Select the Item </option>
+                  <option selected disabled hidden>{editviewproducts[index].product_name} </option> */}
+                  {editviewproducts[index] ? <option selected disabled hidden>{editviewproducts[index].product_name}</option>
+                    :<option selected disabled hidden> Select the Item </option>}
+                  {props.items.map((item,index)=><option value={item.product_id} className = 'formtableList' key={index}>{item.product_name}</option>)}
                   </select>
-                  {/* textarea */}
-                  <textarea className = "textareafromtable" value={description[`description${index}`]}></textarea>
+                  {/* textarea */}{editviewproducts[index] ? <option selected disabled hidden>{editviewproducts[index].product_name}</option>
+                    :<option selected disabled hidden> Select the Item </option>}
+                    {editviewproducts[index] ? <textarea className = "textareafromtable" value={editviewproducts[index].product_description}></textarea>
+                  : <textarea className = "textareafromtable" value={description[`description${index}`]}></textarea>}
+                  {/* {defaulttextarea} */}
                 </div>
               </td>
               {/* quantity */}
@@ -292,7 +340,7 @@ return (
               <td id ="rate"><input type="text" name='rate' value={rvalue[`rvalue${index}`]} id = {index} onChange={(e)=>handleRvalueChange(e)} className="inputbox" data-placement="top" title={rvalue[`rvalue${index}`]} ></input></td>
               {/* discount */}
               <td className="d-flex align-content-start flex-wrap" style={{border:"none"}} id ="discount">
-                <input className="inputanddropbox" name='discount_value' data-placement="top" title={dvalue[`dvalue${x}`]} onChange={(e)=>handleDvalueChange(e)} id = {x} value={dvalue[`dvalue${x}`]}></input> 
+                <input className="inputanddropbox" name='discount_value' data-placement="top" title={dvalue[`dvalue${index}`]} onChange={(e)=>handleDvalueChange(e)} id = {index} value={dvalue[`dvalue${index}`]}></input> 
                 <button className="btn serachbutton modalbutton dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" ></button>
                 <div name='discount_type' id={dtype[`dtype${x}`]} className="dropdown-menu dropdown-menu-right"  aria-labelledby="dropdownMenuButton">
                   <a onClick={(e)=>handleDtypeChange(e)} id={x} name="%" className="dropdown-item">%</a>
@@ -324,7 +372,8 @@ return (
           <li className="list-group-item">Total (Rs.)<input readOnly value={tvalue} name='total'className='subtotalinput'></input></li>
         </ul>
         </div>
-       </div> 
+      
+       </div>       
 )
 }
 

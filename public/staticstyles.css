@@ -41,7 +41,7 @@
       /* background-image: linear-gradient(to right, rgb(202, 197, 49), rgb(243, 249, 167));  */
     }
     .boton {
-      background-color: #d81d55 !important;
+      background-color: rgb(236, 0, 140) !important;
       border: none;
       float: right;
       display:none;

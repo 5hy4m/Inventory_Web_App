@@ -17,7 +17,6 @@ const filterReducer =(state,action)=>{
                 query:state.query,
                 searchColumn: {bname:'customer_name',fname:'Name'},
                 sortColumn: {bname:'customer_name',fname:'Name',asc:true},
-                
             };
         case 'salesorder':
             console.log("Fetched DATA : ",action.payload);

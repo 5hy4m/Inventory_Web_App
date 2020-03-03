@@ -1,36 +1,29 @@
 import React,{useEffect, useState} from 'react'
-import useFilter from '../Hooks/FilterHooks';
+// import useFilter from '../Hooks/FilterHooks';
 import djangoInventory from '../../api/djangoInventory';
 import  '../../css/SOModel.css'
 import axios from 'axios'
 import Table from './Table'
 
-function SalesOrderModel() {
-  const defaultState = {
-    headers:[],
-    loading:true,
-    columns:[],
-    error:'',
-    query:'',
-    searchColumn:{fname:"",bname:"",},
-    sortColumn:{fname:"",bname:"",asc:false},
-  }
-  const [tabledata,setTableData] = useState(0);
-  const [success,setSuccess] = useState(false);
-  const [isSticky,toggleSticky] = useState(true);
-  // const[state,dispatch] = useFilter(defaultState);
+function SalesOrderModel(props) {
+  // console.log(props);
+  
+   // const[state,dispatch] = useFilter(defaultState);
+  const[tabledata,setTableData] = useState(0);
+  const[success,setSuccess] = useState(false);
+  const[name,setName] = useState(-1)
   const[ordernumber,setOrderNumber] = useState('')
   const[customers,setCustomers] = useState([])
   const[items,setItems] = useState([])
+  const[status,setStatus] = useState('draft')
+  const[customerNotes,setCustomerNotes] = useState('')
+  const[tandc,setTandC] = useState('')
   // to create a current date object
-  // console.log(tabledata);
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
   var yyyy = today.getFullYear();
   today = mm + '/' + dd + '/' + yyyy;
-  
-
 
 useEffect(()=>{
   let getNextSalesOrderNumbersource = axios.CancelToken.source();
@@ -43,13 +36,12 @@ async function getNextSalesOrderNumberawait(){
     await djangoInventory
     .get(`http://127.0.0.1:8000/salesorder/10/getNextSalesOrderNumber/`,{cancelToken: getNextSalesOrderNumbersource.token})
     .then((response) =>{
-        console.log(response.data);
         setOrderNumber(response.data)
     })
     .catch(error=>{
         return{
             type:'FETCH_ERROR',
-            payload:error.response.data,
+            payload:error.response,
         }
     })
 }
@@ -69,7 +61,9 @@ async function fetchItems(){
   await djangoInventory
     .get(`http://127.0.0.1:8000/product/`,{cancelToken:fetchItemssource.token})
     .then(async (response) =>{
+        
         setItems(response.data)
+        setName(response.data[0].product_id)
     })
     .catch(error=>{           
       throw error
@@ -131,13 +125,13 @@ function reset(){
 }
 
 function handleSubmit(e){
+  console.log(customers);
   
   async function getNextSalesOrderNumberawait(){
     await djangoInventory
     .get(`http://127.0.0.1:8000/salesorder/10/getNextSalesOrderNumber/`)
     .then((response) =>{
       console.log(response.data);
-      
         setOrderNumber(response.data);
     })
     .catch(error=>{
@@ -147,14 +141,15 @@ function handleSubmit(e){
         }
     })
   }
+  
   if (tabledata === 0 || typeof(tabledata.qvalue)===undefined){
     console.log(tabledata);
     alert("Please Check the required fields and Calculate the total before hitting submit");
     return
   }
-  const customer_id = document.getElementsByName('customername')[0].value;
-  const terms_and_conditions = document.getElementsByName('terms_and_conditions')[0].value;
-  const customer_notes = document.getElementsByName('customer_notes')[0].value;
+  const customer_id = name;
+  const terms_and_conditions = tandc;
+  const customer_notes = customerNotes;
   const sales_order_status  = 'draft';
   const amount              = tabledata.avalue
   const quantity            = tabledata.qvalue       
@@ -215,7 +210,6 @@ function handleSubmit(e){
     reset();
     setSuccess(false)
     await getNextSalesOrderNumberawait();
-    
   })
   .catch(error=>{
     alert("Cannot Save this SalesOrder Please Verify the required fields");
@@ -223,10 +217,24 @@ function handleSubmit(e){
   e.preventDefault();
 }
 
-function handleTabledata(e){
-  setTableData(e);
+function handlecustomername(e){
+  console.log(e.target.value);
+  setName(e.target.value)
+  // document.getElementsByName('customername')[0].id = e.target.value 
 }
 
+function handleTabledata(e){
+  setTableData(e);
+  console.log('TABLE DATA : ',e); 
+}
+
+function handleCustomerNotes(e){
+  setCustomerNotes(e.target.value);
+}
+
+function handleTandC(e){
+  setTandC(e.target.value)
+}
   return (
     <div className="modal fade newSalesOrder-modal-lg" id="newSalesOrder" tabIndex={-1} role="dialog" aria-labelledby="newSalesOrderLabel" aria-hidden="true">
       <div className="modal-dialog modal-xl" role="document">
@@ -242,14 +250,14 @@ function handleTabledata(e){
             <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
             <div className="form-group">
                 <label htmlFor="name">Customer Name</label> 
-                <select name='customername' className="form-control shadow rounded" id="sel1">
+                <select name='customername' onChange={handlecustomername} className="form-control shadow rounded" id="sel1">
                   {customers.map((customer,index) =>
                     <option value={customer.customer_id} key={index}>{customer.customer_name}</option>
                   )}
                 </select>
                 </div>
             </div>
-            <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">  
+            <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
               <div className="form-group">
                   <label htmlFor="name">Sales Order# </label>
                   <input disabled type="text" id="name" className="form-control shadow rounded"  value={ordernumber} placeholder="#" />
@@ -258,7 +266,7 @@ function handleTabledata(e){
             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <div className = " form-group">
                 <label htmlFor="SalesOrder Date">SalesOrder Date</label>
-                <input  type="text" className="form-control shadow rounded" id="SalesOrder Date" defaultValue={today} placeholder="SalesOrder Date" />
+                <input  type="text" className="form-control shadow rounded" id="SalesOrder Date" value={today} disabled placeholder="SalesOrder Date" />
               </div>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -266,22 +274,18 @@ function handleTabledata(e){
                 <label htmlFor="unit">Sales Order Status</label>
                 <input type="text" className="form-control shadow rounded" placeholder="Draft" id="Unit" />
               </div>
-            </div>
-                  
-                  
+            </div>  
             <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-              
             <Table reset={success} setTableData={handleTabledata} items = {items} />
-
               <div className="form-group">
               <label  htmlFor="comment">Customer Notes</label>
-              <textarea name='customer_notes' type="text" className="form-control shadow rounded" placeholder="Customer Remarks" rows="5" id="comment" ></textarea>
+              <textarea name='customer_notes' value={customerNotes} onChange={handleCustomerNotes} type="text" className="form-control shadow rounded" placeholder="Customer Remarks" rows="5" id="comment" ></textarea>
             </div>
           </div>
             <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12">
               <div className="form-group">
               <label  htmlFor="comment">Terms & Conditions</label>
-              <textarea type="text" name='terms_and_conditions' className="form-control shadow rounded" placeholder="Terms & Conditions" rows="5" id="comment" ></textarea>
+              <textarea type="text" value={tandc} onChange={handleTandC} name='terms_and_conditions' className="form-control shadow rounded" placeholder="Terms & Conditions" rows="5" id="comment" ></textarea>
             </div>
           </div>
 

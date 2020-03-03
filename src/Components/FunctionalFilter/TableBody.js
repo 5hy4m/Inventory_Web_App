@@ -51,7 +51,8 @@ function listBuilder(list){
     return list.map((detail,index) => builder(detail,index))
     function builder(detail,index){
       const bodyBuilder = <tr className = "d-flex justify-content-between" key={index} id = {index}>
-          {context.headers.map((header,index)=><Link 
+          {context.headers.map((header,index)=>< td key={index} className = "w-100 tablecell">
+            <Link 
           style={{color:'#d81d55'}} 
           to ={{
             pathname:`${context.content}Details`,
@@ -61,9 +62,9 @@ function listBuilder(list){
               detail,
             }
         }} 
-          key={index} className = "w-100 tablecell">
+           >
             {detail[header.bname]}
-        </Link>)}
+        </Link></td>)}
         </tr>
       return bodyBuilder
     }

@@ -21,6 +21,7 @@ export class TopNav extends Component {
                   <a   className="dropdown-item" href="google.com" data-toggle="modal" data-target=".newSalesOrder-modal-lg">Add New
                     SalesOrder</a>
                   <a   className="dropdown-item" href="google.com" data-toggle="modal" data-target=".newitem-modal-xl">Add New Item</a>
+                  <a   className="dropdown-item" href="google.com" data-toggle="modal" data-target=".newvendor-modal-xl">Add New Vendor</a>
                 </div>
               </li>
               <li   className="itemtop nav-item active">

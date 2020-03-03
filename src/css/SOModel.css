@@ -25,4 +25,14 @@
     float :right;
 }
 
+.stickyeditinfo{
+    border:solid #f4fa9c 10px;
+    background-image: linear-gradient(to right, rgb(236, 0, 140), rgb(252, 103, 103));
+    text-align: center;
+    height:150px;
+    margin-top: 2px;
+    width:260px;
+    float :right !important;
+}
+
 

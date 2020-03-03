@@ -7,58 +7,155 @@ const detailReducer =(state,action)=>{
             if(action.setDetail){
                 return {
                     loading:false,
+                    list:action.list,
+                    detail:action.detail,
+                    content:{
+                        name:'customer_name',
+                        pk:'customer_id'
+                    }
+                  }
+            }else if(action.setList){
+                return {
+                    loading:false,
+                    list:action.list,
+                    detail:action.detail,
+                    content:{
+                        name:'customer_name',
+                        pk:'customer_id'
+                    }
+                  }
+            }else{
+            return {
+                loading:false,
+                list:action.payload,
+                detail:action.detail,
+                content:{
+                    name:'customer_name',
+                    pk:'customer_id'
+                }
+              }
+            }
+        case 'salesorder':
+            console.log("Fetched DATA : ",action);
+            if(action.setDetail){
+                return {
+                    loading:false,
                     list:state.list,
                     detail:action.detail,
+                    content:{
+                        name:'sales_order_no',
+                        pk:'id'
+                    }
                   };
             }else{
             return {
                 loading:false,
                 list:action.payload,
                 detail:action.detail,
-              };}
-        case 'salesorder':
+                content:{
+                    name:'sales_order_no',
+                    pk:'id'
+                }
+              }}
+        case 'purchaseorder':
             console.log("Fetched DATA : ",action.payload);
+            if(action.setDetail){
+                return {
+                    loading:false,
+                    list:state.list,
+                    detail:action.detail,
+                    content:{
+                        name:'vendor_name',
+                        pk:'vendor_id'
+                    }
+                  };
+            }else{
             return {
                 loading:false,
                 list:action.payload,
                 detail:action.detail,
-              };
-        case 'purchaseorder':
-            console.log("Fetched DATA : ",action.payload);
-            return {
-                 };
+                content:{
+                    name:'vendor_name',
+                    pk:'vendor_id'
+                }
+              }}
         case 'vendor':
             console.log("Fetched DATA : ",action.payload);
             return {
-                 };
+                loading:false,
+                list:state.list,
+                detail:action.detail,
+                content:{
+                    name:'',
+                    pk:''
+                }
+              };
         case 'bill':
             console.log("Fetched DATA : ",action.payload);
+            if(action.setDetail){
+                return {
+                    loading:false,
+                    list:state.list,
+                    detail:action.detail,
+                    content:{
+                        name:'vendor_name',
+                        pk:'vendor_id'
+                    }
+                  };
+            }else{
             return {
-                };
+                loading:false,
+                list:action.payload,
+                detail:action.detail,
+                content:{
+                    name:'vendor_name',
+                    pk:'vendor_id'
+                }
+              }}
         case 'invoice':
             console.log("Fetched DATA : ",action.payload);
+            if(action.setDetail){
+                return {
+                    loading:false,
+                    list:state.list,
+                    detail:action.detail,
+                    content:{
+                        name:'customer_name',
+                        pk:'customer_id'
+                    }
+                  };
+            }else{
             return {
-                };
+                loading:false,
+                list:action.payload,
+                detail:action.detail,
+                content:{
+                    name:'customer_name',
+                    pk:'customer_id'
+                }
+              }}
         case 'product':
             console.log("Fetched DATA : ",action.payload);
             return {
-                };
+                loading:false,
+                list:state.list,
+                detail:action.detail,
+                content:{
+                    name:'',
+                    pk:''
+                }
+              };
         case 'productgroup':
             console.log("Fetched DATA : ",action.payload);
             return {
-                };
-        case 'FETCH_ERROR':
-            return {
+                loading:false,
+                list:state.list,
+                detail:action.detail,
+                content:{
+                    name:'',
+                    pk:''
                 }
-        case 'SEARCHBAR':
-            return{
-                }
-        case 'SORTING':
-            return{
-                }
-            case '#number':
-                return{
-                   }
+              };
             default:
             return state
     }

@@ -23,9 +23,15 @@
 }
 
 .listamt{
+
     float:right !important;
-    width: 1600px;
-    right:1600px;
+    width: 600px;
+    right: 600px;
+}
+
+.listamtdisp{
+    /* float:right !important; */
+    margin-left:550px !important;
 }
 
 .listamt > li {

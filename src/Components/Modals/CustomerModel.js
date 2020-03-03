@@ -3,6 +3,7 @@ import '../../css/modal.css'
 
 function CustomerModel() {
   return (
+    
     <div className="modal fade newcustomer-modal-xl" id="newcustomer" tabIndex={-1} role="dialog" aria-labelledby="newcustomerLabel" aria-hidden="true">
       <div className="modal-dialog modal-xl" role="document">
       <div className="modal-content container-fluid">
@@ -12,9 +13,9 @@ function CustomerModel() {
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <form className="jumbotron">
-          <div className=" form-row">
-            <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <form className="">
+          {/* <div className=" form-row"> */}
+            <div className="col-lg-12 col-md-4 col-sm-6 col-xs-12">
             <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <select className="form-control shadow rounded" id="sel1">
@@ -24,7 +25,7 @@ function CustomerModel() {
                   <option>miss</option>
                   <option>dr</option>
                 </select>
-                </div>
+            </div>
               </div>
             <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">  
             <div className="form-group">
@@ -38,7 +39,7 @@ function CustomerModel() {
                 <input type="text" className="form-control shadow rounded" id="quantity" placeholder="phone no" />
               </div>
             </div>
-          </div>
+          {/* </div> */}
           <div className="form-row">
             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <div className="form-group">

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import {Link,withRouter}from 'react-router-dom';
+import {Link}from 'react-router-dom';
 export class SideBar extends Component {
 
   sendContent = (e)=>{
-  //  e.preventDefault();
    console.log("called",e.target.parentElement.id);
-  //  this.props.setSidebarContent(e.target.parentElement.id);
-  //  this.props.fetchContentFromSidebar(e.target.innerText);
+
 }
   
   
@@ -56,7 +54,7 @@ export class SideBar extends Component {
            </li>
            
            <li   onClick = {(e)=>this.sendContent(e)} id="salesorder"  className="d-flex justify-content-center flex-row w-100 navitemicon itemside nav-item">
-           <Link to ="/SalesOrder"   className="py-auto nav-link txt-center flex-grow-1 " href="google.com">Sales Orders </Link>
+           <Link to ="/salesorder"   className="py-auto nav-link txt-center flex-grow-1 ">Sales Orders </Link>
             <button   className="itemside btn boton" data-toggle="tooltip" data-placement="right" title="Tooltip on top"><img src="plus.png"  alt = 'wide.jpeg' className="my-auto plusimg"   /></button>
            </li>
            
@@ -93,4 +91,4 @@ export class SideBar extends Component {
 }
 
 
-export default withRouter(SideBar)
+export default SideBar

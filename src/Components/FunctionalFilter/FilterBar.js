@@ -24,7 +24,7 @@ function FilterBar(props) {
       });
     }
 
-    const button = <button id="outlinebutton" data-toggle="modal" data-target=".newinvoice-modal-xl" className=" mt-1 btn btn-sm py-1 " href="google.com">
+    const button = <button id="outlinebutton" data-toggle="modal" data-target=".newinvoice-modal-lg" className=" mt-1 btn btn-sm py-1 " href="google.com">
                           New <b> +</b>
                         </button>
     const menubar=<div className="dropdown-menu dropdown-menu-right" aria-labelledby="filterbarmenu">
@@ -64,16 +64,6 @@ context.headers.forEach(header => {
     return (
         <nav className=" flex-fill filterbar flex-column ">
             <div className="navbar p-0">
-              <div className="nav-item dropdown">
-                <button type="button outlinebutton" id="dropdowninfilterbar" className="filldropdown dropdown-toggle" data-toggle="dropdown">
-                  All Customers
-                </button>
-                <div className="dropdown-menu ">
-                  <a  className="dropdown-item" href="google.com">All {props.filterType}</a>
-                  <a  className="dropdown-item" href="google.com">Paid {props.filterType}</a>
-                  <a  className="dropdown-item" href="google.com">UnPaid {props.filterType}</a>
-                </div>
-              </div>
               <ul className=" navbar-nav flex-row ml-auto">
                 {/* SearchBAr */}
                 <li className = "input-group  mr-2 ">
