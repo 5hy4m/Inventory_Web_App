@@ -15,9 +15,7 @@ function SalesOrderDetails() {
   const[customernotes,setCustomerNotes] = useState('')
   const[tandc,setTandC] = useState('')
   const customernameRef = useRef(null)
-
-
-
+  
   if(context.detail.sales_products){
   const product_ids = context.detail.sales_products.map((x)=> x.product_id);
   var product = []
@@ -29,10 +27,6 @@ function SalesOrderDetails() {
           })
         });              
   }
-
-
-  console.log(context.detail.sales_products);
-  console.log(product);
   
 var customer_name = isedit ? customers.map((customer,index) => 
 <option value={customer.customer_id} key={index}>{customer.customer_name}</option>) 
@@ -174,15 +168,35 @@ function constructDict(qarray,parray,rarray,dtypearray,dvaluearray,avaluearray,)
   });
   return dict
 }
-    
 
-function handleUpdate(e){
+// This will update the list which is shown in the frontend
+function updateList(data){
+  let updatedlist = []
+  console.log(data);
+  return updatedlist = context.list.map((item)=>{
+    if(item.id === data.id){
+      return data
+    }
+    else{
+      return item
+    }
+  })
+}
+
+// this will delete the deleted data in the backend to show the changes in frontend we use this function
+
+function deleteList(data){
+  let deletedlist = []
+  return deletedlist = context.list.filter((x)=>data.id !== x.id)
+}
+
+async function handleUpdate(e){
   if (tabledata === 0 || typeof(tabledata.qvalue)===undefined){
     console.log(tabledata);
     alert("Please Check the required fields and Calculate the total before hitting submit");
     return
   }
-  let v ={}
+
   const customer_id = parseInt(customernameRef.current.value);
   const terms_and_conditions = tandc;
   const customer_notes = customernotes;
@@ -197,9 +211,6 @@ function handleUpdate(e){
   const adjustment_value    = tabledata.adj;
   const total               = tabledata.tot;
   const subtotal            = tabledata.sub;
-  // product_id.forEach(element => {
-  //   v={...v,[Object.keys(element)[0]]:Object.values(element)[0]}
-  // });
   const qarray = sortTableData(quantity);
   const parray =sortTableData(product_id);
   const rarray = sortTableData(rate);
@@ -224,18 +235,40 @@ function handleUpdate(e){
 };
 console.log(data);
 
-axios.put(`http://127.0.0.1:8000/salesorder/${context.detail.id}/`,data)
+await axios.put(`http://127.0.0.1:8000/salesorder/${context.detail.id}/`,data)
 .then(async response =>{
   console.log("SUCCESS : ",response.data);
   alert("The salesorder has been created successfully");
-  // context.setList()
+  context.setList(updateList(response.data))
+  context.setDetail(response.data)
   setEdit(false)
 })
 .catch(error=>{
-  alert("Cannot Save this SalesOrder Please Verify the required fields");
+  alert("Cannot update this SalesOrder Please Verify the required fields");
   console.log(error.response)
 });
 e.preventDefault();
+}
+
+async function handleDelete(e){
+  let lists = []
+  console.log("handluing delete");
+  await axios.delete(`http://127.0.0.1:8000/salesorder/${context.detail.id}/`)
+  .then(async response =>{
+    console.log("DELETED successfully: ",response.data);
+    alert("The salesorder has been deleted successfully");
+    context.setList(deleteList(context.detail));
+    lists = context.list.filter((x)=>{
+      return x.id !== context.detail.id
+    });
+    context.setDetail(lists[0])
+    setEdit(false)
+  })
+  .catch(error=>{
+    alert("Error while deleting");
+    console.log(error.response)
+  });
+  e.preventDefault();
 }
 
     
@@ -247,6 +280,7 @@ function handleCustomerName(e){
   console.log("changing");
   setName(e.target.value);
 }
+
 
     return (
         <div className="displaydetails d-flex flex-column col-xl-10 col-md-10 col-sm-10 col-xs-10">
@@ -267,7 +301,7 @@ function handleCustomerName(e){
                     </button>
                   </li>
                   <li id='convert' className="nav-item mr-2">
-                    <button id="outlinebutton" data-toggle="modal" data-target=".newinvoice-modal-lg" className=" mt-1 btn btn-sm py-1 " href="google.com">
+                    <button onClick={handleDelete} id="outlinebutton" data-toggle="modal" data-target=".newinvoice-modal-lg" className=" mt-1 btn btn-sm py-1 " href="google.com">
                       Delete
                     </button>
                   </li>

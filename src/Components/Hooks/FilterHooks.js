@@ -43,7 +43,7 @@ const filterReducer =(state,action)=>{
                     {bname:'purchase_date',fname:'DATE'},
                     {bname:"purchase_order_no",fname:' PURCHASE ORDER#'},
                     {bname:"purchase_order_status",fname:'ORDER STATUS'},
-                    {bname:'vendor_name',fname:'VENDOR NAME'}
+                    {bname:'name',fname:'VENDOR NAME'}
             ],
                 columns:action.payload,
                 error:'',
@@ -57,16 +57,16 @@ const filterReducer =(state,action)=>{
             return {
                 loading:false,
                 headers:[
-                    {bname:'vendor_name',fname:'NAME'},
-                    {bname:"vendor_phno",fname:'Phone No'},
-                    {bname:"vendor_email",fname:'Email'},
+                    {bname:'name',fname:'NAME'},
+                    {bname:"phone_no",fname:'Phone No'},
+                    {bname:"email",fname:'Email'},
                     {bname:"payables",fname:'Outstanding Payables'}
             ],
                 columns:action.payload,
                 error:'',
                 query:state.query,
-                searchColumn:{bname:'vendor_name',fname:'NAME'},
-                sortColumn:{bname:'vendor_name',fname:'NAME',asc:true},
+                searchColumn:{bname:'name',fname:'NAME'},
+                sortColumn:{bname:'name',fname:'NAME',asc:true},
                 
             };
         case 'bill':
@@ -78,7 +78,7 @@ const filterReducer =(state,action)=>{
                     {bname:"bill_no",fname:' BILL#'},
                     {bname:"bill_status",fname:'BILL STATUS'},
                     {bname:"due_date",fname:' DUE DATE'},
-                    {bname:"vendor_name",fname:'VENDOR NAME'},
+                    {bname:"name",fname:'VENDOR NAME'},
             ],
                 columns:action.payload,
                 error:'',
@@ -94,7 +94,6 @@ const filterReducer =(state,action)=>{
                 headers:[
                     {bname:"invoice_date",fname:'DATE'},
                     {bname:"invoice_no",fname:'INVOICE#'},
-                    {bname:"due_date",fname:'DUE DATE'},
                     {bname:"customer_name",fname:'Customer Name'},
                     {bname:"invoice_status",fname:'Status'}
             ],

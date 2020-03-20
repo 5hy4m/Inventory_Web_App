@@ -24,7 +24,8 @@ const detailReducer =(state,action)=>{
                         pk:'customer_id'
                     }
                   }
-            }else{
+                }
+            else{
             return {
                 loading:false,
                 list:action.payload,
@@ -47,16 +48,27 @@ const detailReducer =(state,action)=>{
                         pk:'id'
                     }
                   };
-            }else{
+            }else if(action.setList){
             return {
                 loading:false,
-                list:action.payload,
+                list:action.list,
                 detail:action.detail,
                 content:{
                     name:'sales_order_no',
                     pk:'id'
                 }
-              }}
+              }
+            }else{
+                return {
+                    loading:false,
+                    list:action.payload,
+                    detail:action.detail,
+                    content:{
+                        name:'sales_order_no',
+                        pk:'id'
+                    }
+                  }
+                }
         case 'purchaseorder':
             console.log("Fetched DATA : ",action.payload);
             if(action.setDetail){
@@ -65,7 +77,7 @@ const detailReducer =(state,action)=>{
                     list:state.list,
                     detail:action.detail,
                     content:{
-                        name:'vendor_name',
+                        name:'name',
                         pk:'vendor_id'
                     }
                   };
@@ -75,7 +87,7 @@ const detailReducer =(state,action)=>{
                 list:action.payload,
                 detail:action.detail,
                 content:{
-                    name:'vendor_name',
+                    name:'name',
                     pk:'vendor_id'
                 }
               }}
@@ -98,7 +110,7 @@ const detailReducer =(state,action)=>{
                     list:state.list,
                     detail:action.detail,
                     content:{
-                        name:'vendor_name',
+                        name:'name',
                         pk:'vendor_id'
                     }
                   };
@@ -108,7 +120,7 @@ const detailReducer =(state,action)=>{
                 list:action.payload,
                 detail:action.detail,
                 content:{
-                    name:'vendor_name',
+                    name:'name',
                     pk:'vendor_id'
                 }
               }}

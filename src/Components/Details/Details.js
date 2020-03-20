@@ -25,22 +25,25 @@ function Details(props) {
   console.log();
   
   const setDetail =(data)=> {
-    let detail=state.list.filter((x)=>x[state.content.pk] == data.target.id)[0]
-    // console.log(data.target.id);
-    // console.log(state.list);
-    // console.log(detail);
-    
+    if(Object.keys(data).length === 0)
+    data=state.list.filter((x)=>x[state.content.pk] == data)[0]
     dispatch({
     type:props.location.state.content,
     setDetail:true,
     setList:false,
-    detail:detail ,
+    detail:data ,
     list:state.list,
   });  
 }
 
 const setList = (data)=>{
-  
+  dispatch({
+    type:props.location.state.content,
+    setDetail:false,
+    setList:true,
+    detail:state.detail ,
+    list:data,
+  });  
 }
 
 

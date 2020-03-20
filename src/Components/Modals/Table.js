@@ -22,7 +22,7 @@ function Table(props) {
       if(props.reset === true){
         const len = Object.keys(value).length
         for (let i=0;i<len-1;i++){
-          handleDeleteRow();
+          // handleDeleteRow();
         }
         console.log('reseting');
         setValue({value0:0});
@@ -61,9 +61,7 @@ function handleDvalueChange(e){
     else{
       if(qvalue[`qvalue${id}`]*rvalue[`rvalue${id}`]-discount === NaN || discount === 0){
         setAvalue({...avalue,[`avalue${id}`]:(qvalue[`qvalue${id}`]*rvalue[`rvalue${id}`])})
-
       }}
-
   }
 
 function handleRvalueChange(e){

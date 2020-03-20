@@ -6,7 +6,7 @@ import axios from 'axios'
 import Table from './Table'
 import {DetailsContext} from '../Details/Details'
 
-function SalesOrderModel(props) {
+function InvoiceModel(props) {
   // console.log(props);
   const context = useContext(DetailsContext);
    // const[state,dispatch] = useFilter(defaultState);
@@ -27,16 +27,17 @@ function SalesOrderModel(props) {
   today = mm + '/' + dd + '/' + yyyy;
 
 useEffect(()=>{
-  let getNextSalesOrderNumbersource = axios.CancelToken.source();
+  let getNextInvoiceNumbersource = axios.CancelToken.source();
 
   let fetchCustomersource = axios.CancelToken.source();
 
   let fetchItemssource = axios.CancelToken.source();
 
-async function getNextSalesOrderNumberawait(){
+async function getNextInvoiceNumberawait(){
     await djangoInventory
-    .get(`http://127.0.0.1:8000/salesorder/10/getNextSalesOrderNumber/`,{cancelToken: getNextSalesOrderNumbersource.token})
+    .get(`http://127.0.0.1:8000/invoice/10/getNextInvoiceNumber/`,{cancelToken: getNextInvoiceNumbersource.token})
     .then((response) =>{
+        console.log(response.data);
         setOrderNumber(response.data)
     })
     .catch(error=>{
@@ -72,13 +73,13 @@ async function fetchItems(){
 }
   fetchItems();
   fetchCustomer();
-  getNextSalesOrderNumberawait();
+  getNextInvoiceNumberawait();
 
   return ()=>{
     console.log('UNMOUNTING');
     fetchItemssource.cancel();
     fetchCustomersource.cancel();
-    getNextSalesOrderNumbersource.cancel();
+    getNextInvoiceNumbersource.cancel();
   }
 },[])
   
@@ -128,9 +129,9 @@ function reset(){
 function handleSubmit(e){
   console.log(customers);
   
-  async function getNextSalesOrderNumberawait(){
+  async function getNextInvoiceNumberawait(){
     await djangoInventory
-    .get(`http://127.0.0.1:8000/salesorder/10/getNextSalesOrderNumber/`)
+    .get(`http://127.0.0.1:8000/invoice/10/getNextInvoiceNumber/`)
     .then((response) =>{
       console.log(response.data);
         setOrderNumber(response.data);
@@ -151,7 +152,7 @@ function handleSubmit(e){
   const customer_id = name;
   const terms_and_conditions = tandc;
   const customer_notes = customerNotes;
-  const sales_order_status  = 'draft';
+  const invoice_status  = 'draft';
   const amount              = tabledata.avalue
   const quantity            = tabledata.qvalue       
   const product_id          = tabledata.value         
@@ -186,39 +187,37 @@ function handleSubmit(e){
   const products = constructDict(qarray,parray,rarray,dtypearray,dvaluearray,avaluearray,);
   // console.log(sales_products);
   
-    let data = {
-      "sales_products": products,
-      "sales_order_no": ordernumber,
-      "sales_order_status": sales_order_status,
-      "customer_notes": customer_notes,
-      "terms_and_conditions": terms_and_conditions,
-      "adjustment": adjustment,
-      "adjustment_value": adjustment_value,
-      "subtotal": subtotal,
-      "total": total,
-      "customer_id": customer_id,
-  }
+    const data = {
+        "invoice_products": products,
+        "invoice_no": ordernumber,
+        "invoice_status": invoice_status,
+        "customer_notes": customer_notes,
+        "terms_and_conditions": terms_and_conditions,
+        "adjustment": adjustment,
+        "adjustment_value": adjustment_value,
+        "subtotal": subtotal,
+        "total": total,
+        "customer_id": customer_id,
+    }
 
   console.log(data);
   
-
-
-  axios.post('http://127.0.0.1:8000/salesorder/',data)
+  djangoInventory.post('http://127.0.0.1:8000/invoice/',data)
   .then(async response =>{
     console.log("SUCCESS : ",response.data);
-    alert("The salesorder has been created successfully");
+    alert("The invoice has been created successfully");
     
     setSuccess(true)
     reset();
     setSuccess(false)
-    await getNextSalesOrderNumberawait();
+    await getNextInvoiceNumberawait();
     props.setDetail(response.data)
     // context.setList([...context.list,[response.data]])
     return
   })
   .catch(error=>{
-    alert("Cannot Save this SalesOrder Please Verify the required fields");
-    console.log(error)});
+    alert("Cannot Save this invoice Please Verify the required fields");
+    console.log(error.response)});
   e.preventDefault();
 }
 
@@ -240,12 +239,13 @@ function handleCustomerNotes(e){
 function handleTandC(e){
   setTandC(e.target.value)
 }
+
   return (
-    <div className="modal fade newSalesOrder-modal-lg" id="newSalesOrder" tabIndex={-1} role="dialog" aria-labelledby="newSalesOrderLabel" aria-hidden="true">
+    <div className="modal fade newInvoice-modal-lg" id="newInvoice" tabIndex={-1} role="dialog" aria-labelledby="newInvoiceLabel" aria-hidden="true">
       <div className="modal-dialog modal-xl" role="document">
         <div className="modal-content container-fluid">
           <div className="modal-header">
-            <h5 className="modal-title" id="newitemLabel">Add New SalesOrder</h5>
+            <h5 className="modal-title" id="newInvoiceLabel">Add New Invoice</h5>
             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
@@ -264,19 +264,19 @@ function handleTandC(e){
             </div>
             <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
               <div className="form-group">
-                  <label htmlFor="name">Sales Order# </label>
+                  <label htmlFor="name">Invoice Order# </label>
                   <input disabled type="text" id="name" className="form-control shadow rounded"  value={ordernumber} placeholder="#" />
               </div>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <div className = " form-group">
-                <label htmlFor="SalesOrder Date">SalesOrder Date</label>
-                <input  type="text" className="form-control shadow rounded" id="SalesOrder Date" value={today} disabled placeholder="SalesOrder Date" />
+                <label htmlFor="Invoice Date">Invoice Date</label>
+                <input  type="text" className="form-control shadow rounded" id="invoice Date" value={today} disabled placeholder="invoice Date" />
               </div>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <div className="form-group">
-                <label htmlFor="unit">Sales Order Status</label>
+                <label htmlFor="unit">invoice Status</label>
                 <input type="text" className="form-control shadow rounded" placeholder="Draft" id="Unit" />
               </div>
             </div>  
@@ -305,4 +305,4 @@ function handleTandC(e){
       )
 }
 
-export default SalesOrderModel
+export default InvoiceModel

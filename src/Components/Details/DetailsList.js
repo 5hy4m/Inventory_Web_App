@@ -3,13 +3,13 @@ import {DetailsContext} from './Details'
 
 function CustomerDetails() {
     const context = useContext(DetailsContext);
-    // console.log(context);
+    console.log(context.list);
 
     function handleListClick(e){
         e.preventDefault()
         console.log(e.target.id);
         
-        context.setDetail(e)
+        context.setDetail(parseInt(e.target.id))
     }
 
     return (

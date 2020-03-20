@@ -14,7 +14,7 @@ async function fetchChildDataOfSalesOrder(filterType, response) {
         await djangoInventory
             .get(`http://127.0.0.1:8000/${filterType}/${data.id}/customer/`)
             .then(results => {
-                console.log(results.data);
+                // console.log(results.data);
                 data.customer_name = results.data
             })
             .catch(error => {
@@ -22,7 +22,7 @@ async function fetchChildDataOfSalesOrder(filterType, response) {
             })
 
     }
-    console.log("mutated DATA FROM CHILD : ", response.data);
+    // console.log("mutated DATA FROM CHILD : ", response.data);
 
     return response.data
 }
@@ -49,7 +49,7 @@ async function fetchChildDataOfBill(filterType, response) {
         await djangoInventory
             .get(`http://127.0.0.1:8000/${filterType}/${data.id}/vendor/`)
             .then(results => {
-                data.vendor_name = results.data
+                data.name = results.data
             })
             .catch(error => {
                 return {type: 'FETCH_ERROR', payload: error.response.data};
@@ -66,7 +66,7 @@ async function fetchChildDataOfPurchaseOrder(filterType, response) {
         await djangoInventory
             .get(`http://127.0.0.1:8000/${filterType}/${data.id}/vendor/`)
             .then(results => {
-                data.vendor_name = results.data
+                data.name = results.data
             })
             .catch(error => {
                 return {type: 'FETCH_ERROR', payload: error.response.data};
@@ -218,7 +218,7 @@ function Filter(props) {
             .get(`http://127.0.0.1:8000/${filterType}/`)
             .then(async(response) => {
                 const mutatedData = await fetchChildDataOfPurchaseOrder(filterType, response);
-                // console.log("mutatedData from parent",mutatedData);
+                console.log("mutatedData from parent",mutatedData);
                 dispatch({type: filterType, payload: mutatedData})
             })
             .catch(error => {
@@ -260,7 +260,7 @@ function Filter(props) {
     useEffect(() => {
 
         async function fetchData() {
-            console.log(props.filterType);
+            // console.log(props.filterType);
 
             switch (props.filterType) {
                 case 'customer':
@@ -294,10 +294,29 @@ function Filter(props) {
         fetchData();
     }, [props.filterType])
 
+function setDetail(data){
+    // console.log([...state.columns,props.detail]);
+    // dispatch({
+    //     type:props.filterType,
+    //     payload:[...state.columns,props.detail]
+    // })
+}
+
     return (
         <Context.Provider
             value=
-            {{ headers:state.headers, details:state.columns, searchbardata:(data)=>searchBarCallBack(data), query:state.query, searchColumn:state.searchColumn, sortdata:(data)=>sortinfoCallBack(data), sortColumn:state.sortColumn, loading:state.loading, error:state.error, content:props.filterType }}>
+            {{ headers:state.headers, details:state.columns,
+             searchbardata:(data)=>searchBarCallBack(data),
+              query:state.query,
+                searchColumn:state.searchColumn,
+                 sortdata:(data)=>sortinfoCallBack(data),
+                  sortColumn:state.sortColumn,
+                   loading:state.loading,
+                    error:state.error,
+                     content:props.filterType,
+                     detail:props.detail,
+                     setDetail
+                      }}>
             <section className="d-flex flex-column w-100">
                 <FilterBar filterType={props.filterType}/>
                 <FilterContainer/>

@@ -51,7 +51,7 @@ async function fetchChildDataOfBill(filterType,response){
     for await(const data of response.data){
         await djangoInventory.get(`http://127.0.0.1:8000/${filterType}/${data.id}/vendor/`)
         .then(results=>{
-                        data.vendor_name = results.data[0].fields.vendor_name
+                        data.name = results.data[0].fields.name
                     })
         .catch(error=>{
             return{
@@ -70,7 +70,7 @@ async function fetchChildDataOfPurchaseOrder(filterType,response){
     for await(const data of response.data){
         await djangoInventory.get(`http://127.0.0.1:8000/${filterType}/${data.id}/vendor/`)
         .then(results=>{
-                        data.vendor_name = results.data[0].fields.vendor_name
+                        data.name = results.data[0].fields.name
                     })
         .catch(error=>{
             return{

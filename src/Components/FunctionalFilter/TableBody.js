@@ -7,10 +7,13 @@ function TableBody() {
 const context = useContext(Context);
 const [tablebody,setTableBody] = useState( <tr><td></td></tr>);
 
+useEffect(() => {
+  context.setDetail(context.detail)
+}, [context.detail])
+
+
 // actual filtering process takes place here
 function filtering(detail){
-  // console.log(detail)
-  // console.log(context);
   
 // if(isNaN(context.searchColumn.fname !== "" && detail[context.searchColumn.bname] !== undefined)){
   if(detail[context.searchColumn.bname] !== undefined && isNaN(detail[context.searchColumn.bname])){
@@ -19,6 +22,8 @@ function filtering(detail){
 }else if (context.searchColumn.fname !== ""){
   return String(detail[context.searchColumn.bname]).indexOf(context.query) !== -1; 
 }}
+
+
 
 var filteredDetails = context.details.filter((detail)=>filtering(detail));
 
@@ -48,6 +53,7 @@ function sorter(list,type){
 
 // List Builder helps to render elements 
 function listBuilder(list){
+  console.log(context);
     return list.map((detail,index) => builder(detail,index))
     function builder(detail,index){
       const bodyBuilder = <tr className = "d-flex justify-content-between" key={index} id = {index}>
@@ -83,12 +89,12 @@ useEffect(()=>{
                   <td className = "w-100 tablecell">{context.error}</td>
                 </tr>);
   }else{
-    console.log(context);
+    // console.log(context);
     setTableBody(listBuilder(filteredDetails));
   }
   // SORTING
   // IF Context.sortColumn is undefined and ascending
-  console.log(context.sortColumn);
+  // console.log(context.sortColumn);
   
 if(context.sortColumn && context.sortColumn.asc){
     // console.log("SORTDATA : ",context.sortColumn);

@@ -4,7 +4,7 @@ export default class ContentData extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            customers :[],
+            vendors :[],
             products:[],
             productgroups:[],
         }

@@ -5,13 +5,13 @@
     border-bottom: solid rgb(216, 216, 212) 2px;
     border-right:solid rgb(216, 216, 212) 2px;
   }
-  .customerlistcontainer {
+  .vendorlistcontainer {
     height: 100%;
     padding:0;
     border-bottom: solid rgb(216, 216, 212) 2px;
     border-right:solid rgb(216, 216, 212) 2px;
   }
-  .customerlistbar{
+  .vendorlistbar{
     height:100%;
   }
   .listViewinDetails{
@@ -20,7 +20,7 @@
     border-bottom:solid rgb(216, 216, 212) 2px;;
   }
   
-  .customerlisthover:hover{
+  .vendorlisthover:hover{
     border: solid red 5px;
     background-color: #888;
   }
